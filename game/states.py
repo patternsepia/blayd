@@ -8,7 +8,7 @@ from engine import colors as cn
 from engine.ui import Label, Button, VBox, InputBox 
 
 from game.deebee import *
-from game.components import PhysicsComponent, PickupComponent
+from game.components import PhysicsComponent, PickupComponent, VisualComponent
 from game.systems import attempt_stash_item
 
 class GameState:
@@ -295,12 +295,21 @@ class InventoryState(GameState):
             if hasattr(self.game.map, "is_blocked") and not self.game.map.is_blocked(tx, ty):
                 drop_x, drop_y = tx, ty; break
         
+        # 1. Sync Entity Pixel Position
+        item.pos_x = drop_x * TILESIZE
+        item.pos_y = drop_y * TILESIZE
+
+        # 2. Ensure Physics
         if not hasattr(item, 'physics') or not item.physics:
             item.physics = PhysicsComponent(drop_x, drop_y, speed_mps=0)
         else:
             item.physics.x, item.physics.y = drop_x, drop_y
             item.physics.vx, item.physics.vy = 0, 0
         
+        # 3. Ensure Visuals (If it was just an inventory item)
+        if not hasattr(item, 'visual') or not item.visual:
+            item.visual = VisualComponent(color=cn.GOLD)
+
         if not hasattr(item, 'pickup'): item.pickup = PickupComponent()
         if item not in self.game.all_sprites: self.game.all_sprites.add(item)
 

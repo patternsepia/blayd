@@ -56,18 +56,15 @@ class StateManager:
         self.stack.append(state)
         state.enter()
 
-    def handle_input(self):
-        """
-        Polls Pygame event queue and passes events to the top state.
-        """
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.game.running = False
-                self.game.playing = False
-                return
-
-            if self.stack:
-                self.stack[-1].handle_input(event)
+    def handle_input(self, input_mgr):
+        if self.stack:
+            self.stack[-1].handle_input(input_mgr)
+                
+    def handle_event(self, event):
+        if self.stack:
+            # Assumes the State class also has a handle_event method
+            if hasattr(self.stack[-1], 'handle_event'):
+                self.stack[-1].handle_event(event)
 
     def update(self):
         if self.stack:

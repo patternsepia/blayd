@@ -2,13 +2,17 @@ import pygame
 from game.deebee import TILESIZE
 
 class Entity(pygame.sprite.Sprite):
-    def __init__(self, game_context, x, y):
+    def __init__(self, game_context, x=None, y=None):
         super().__init__()
         self.game = game_context
         
         # Generic Transform Data
-        self.pos_x = x * TILESIZE
-        self.pos_y = y * TILESIZE
+        if x is not None and y is not None:
+            self.pos_x = x * TILESIZE
+            self.pos_y = y * TILESIZE
+        else:
+            self.pos_x = 0
+            self.pos_y = 0
         
         self.visual = None
         self.physics = None

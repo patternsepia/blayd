@@ -46,20 +46,26 @@ def create_item(game, item_id, definitions):
     # 1. Item Metadata
     e.item = ItemComponent(
         name=data.get("name", "Unknown"),
-        weight=data.get("weight", 0.0),
-        volume=data.get("volume", 0),
-        layer=data.get("layer", None),
-        slots=data.get("slots", []) # e.g. ["head"] or ["grasp"]
+        weight=data.get("weight", 0.1),
+        volume=data.get("volume", 0.1),
+        value=data.get("value", 0),
+        material=data.get("material", None)
     )
     
+    # 2. Wearable Logic
+    slots = data.get("slots", [])
+    layer = data.get("layer", None)
     
-    # 3. Optional Components (Tags)
+    if slots or layer is not None:
+        # Default layer to 1 (Outer) if unspecified but slots exist
+        if layer is None: layer = 1 
+        e.wearable = WearableComponent(layer=layer, slots=slots)
+
+    # 3. Container Logic
     tags = data.get("tags", [])
-    
-    # Containers (Backpacks, Pants with pockets)
     if "container" in tags or "container_capacity" in data:
-        cap = data.get("container_capacity", 500)
-        e.container = ContainerComponent(capacity=cap)
+        cap_vol = data.get("container_capacity", 10)
+        e.container = ContainerComponent(capacity_vol=cap_vol)
         
     return e
 

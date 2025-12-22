@@ -1,20 +1,20 @@
-import pygame
 import sys
 import os
 from types import SimpleNamespace
+
+import pygame
 
 # Engine
 from engine.events import StateManager
 from engine import colors as cn
 from engine.input import InputManager
-
 # Game Logic
 import game.deebee as db
 from game.map_gen import Map
 from game.loader import *
 from game.entities import create_player, create_mob
 from game.systems import CombatSystem
-
+from game.systems import MaterialSystem
 # UI & States
 from game.hud import HUD
 from game.states import MainMenuState, RoamingState
@@ -45,7 +45,8 @@ class Game:
         # Data Loading
         self.item_defs = load_item_definitions()
         self.body_plans = load_body_plans()
-        self.loadouts = validate_loadouts(load_loadouts(), self.item_defs)
+        self.loadout_defs = validate_loadouts(load_loadouts(), self.item_defs)
+        self.material_defs = load_materials()
         
         self.hud = HUD()
         self.custom_seed = None
@@ -66,6 +67,7 @@ class Game:
         self.all_sprites = None
         self.mobs = None
         self.combat_system = None
+        self.material_sytem = MaterialSystem(self.material_defs)
 
     def new_game(self):
         self.map = Map(db.GRID_WIDTH, db.GRID_HEIGHT, seed=self.custom_seed)

@@ -58,38 +58,43 @@ class CombatSystem:
         # 2. Mobs hit Player (Optional: Add this logic here later)
 
 class MaterialSystem:
-    def update(self, dt):
-        # 1. Get Global Context ONCE
-        weather = game.weather.current
-        temp = game.weather.temperature
+    def __init__(self, material_db):
+        self.material_db = material_db
+
+    def update(self, game_context, dt):
+        # 1. Get Global Context from the passed 'game_context'
+        # Ensure game_context has a 'weather' attribute (e.g. game.weather)
+        # If 'weather' isn't implemented yet, handle that safety check.
+        weather = getattr(game_context, "weather", None)
+        current_weather = weather.current if weather else "none"
+        temp = weather.temperature if weather else 20
         
-        # 2. Iterate Entities ONCE
-        for entity in game.entities_with_material:
-            mat = entity.material
-            props = MATERIAL_DB[mat.id]
-            
-            # --- PHASE A: IMMEDIATE PHYSICS ---
-            # Update Wetness
-            if weather == "rain" and not self.is_sheltered(entity):
-                mat.wetness = min(1.0, mat.wetness + dt * 0.1)
-            else:
-                mat.wetness = max(0.0, mat.wetness - dt * 0.05)
+        # 2. Iterate Entities
+        # We access entities from the game_context
+        for sprite in game_context.all_sprites:
+            if hasattr(sprite, 'material'):
+                mat = sprite.material
                 
-            # --- PHASE B: REACTIONS (The old "DecaySystem") ---
-            
-            # Reaction: Rust (Requires Iron + Water)
-            if props["rusts"] and mat.wetness > 0.5:
-                # Rust is slow, so we multiply damage by small delta
-                damage = 0.001 * dt 
-                mat.integrity -= damage
-            
-            # Reaction: Rot (Requires Organic + Time)
-            if props["rots"]:
-                # Rot might speed up if it's hot and wet
-                rate = 0.001
-                if temp > 30: rate *= 2
-                if mat.wetness > 0.5: rate *= 2
-                mat.integrity -= rate * dt
+                # Use the injected DB, not a global
+                props = self.material_db.get(mat.material_id, {})
+                
+                # --- PHASE A: IMMEDIATE PHYSICS ---
+                if current_weather == "rain": # and check shelter...
+                     mat.wetness = min(1.0, mat.wetness + dt * 0.1)
+                else:
+                     mat.wetness = max(0.0, mat.wetness - dt * 0.05)
+                
+                # --- PHASE B: REACTIONS ---
+                if props.get("rusts", False) and mat.wetness > 0.5:
+                    damage = 0.001 * dt 
+                    mat.integrity -= damage
+
+                if props.get("rots", False):
+                    rate = 0.001
+                    if temp > 30: rate *= 2
+                    if mat.wetness > 0.5: rate *= 2
+                    mat.integrity -= rate * dt
+
 def attempt_stash_item(player, item_entity):
     """
     Tries to add item to: 1. Largest worn container, 2. Hands.
