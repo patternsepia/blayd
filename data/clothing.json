@@ -1,0 +1,32 @@
+{
+  "layer_definitions": {
+    "0": ["Inner", "inr"],
+    "1": ["Skin", "skn"],
+    "2": ["Base", "reg"],
+    "3": ["Middle", "mid"],
+    "4": ["Outer", "out"],
+    "5": ["Accessories", "acc"]
+  },
+  "equipment slots": {
+    "head": [],
+    "horn": ["sagittal"],
+    "ear": ["sagittal", "orifice"],
+    "face": ["transverse"],
+    "eye": ["sagittal"],
+    "mouth": ["orifice"],
+    "teeth": ["transverse"],
+    "neck": [],
+    "torso": ["frontal", "sagittal"],
+    "arm": ["sagittal", "transverse"],
+    "elbow": ["joint", "sagittal"],
+    "wrist": ["joint", "sagittal"],
+    "hand": ["digits", "transverse","sagittal"],
+    "waist": ["frontal"],
+    "hips": ["frontal", "orifice"],
+    "tail": [],
+    "leg": ["transverse", "sagittal"],
+    "knee":["joint", "sagittal"],
+    "ankle" :["joint", "sagittal"],
+    "foot": ["digits", "sagittal", "transverse"]
+  }
+}

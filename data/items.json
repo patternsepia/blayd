@@ -1,0 +1,162 @@
+[
+    {
+        "id": "tshirt",
+        "name": "Grey T-Shirt",
+        "weight": 0.15,
+        "volume": 300,
+        "layer": "inner",
+        "slots": ["torso"], 
+        "tags": ["clothing"]
+    },
+    {
+        "id": "jeans",
+        "name": "Blue Jeans",
+        "weight": 0.6,
+        "volume": 800,
+        "layer": "inner",
+        "slots": ["leg"],
+        "tags": ["clothing"]
+    },
+    {
+        "id": "cargo_pants",
+        "name": "Tactical Cargo Pants",
+        "weight": 0.8,
+        "volume": 900,
+        "layer": "inner",
+        "slots": ["leg"],
+        "container_capacity": 1500,
+        "tags": ["clothing", "container"]
+    },
+    {
+        "id": "boots",
+        "name": "Leather Boots",
+        "weight": 1.2,
+        "volume": 2000,
+        "layer": "outer",
+        "slots": ["foot"],
+        "tags": ["clothing"]
+    },
+    {
+        "id": "gloves_leather",
+        "name": "Leather Gloves",
+        "weight": 0.2,
+        "volume": 100,
+        "layer": "outer",
+        "slots": ["manipulator"],
+        "tags": ["clothing"]
+    },
+    {
+        "id": "backpack_large",
+        "name": "Hiking Backpack",
+        "weight": 1.5,
+        "volume": 1500,
+        "layer": "back",
+        "slots": ["chest"],
+        "container_capacity": 40000,
+        "tags": ["container", "clothing"]
+    },
+    {
+        "id": "fanny_pack",
+        "name": "Utility Waist Bag",
+        "weight": 0.3,
+        "volume": 200,
+        "layer": "outer",
+        "slots": ["pelvis"],
+        "container_capacity": 2000,
+        "tags": ["container", "clothing"]
+    },
+    {
+        "id": "ballistic_vest",
+        "name": "Kevlar Vest",
+        "weight": 4.5,
+        "volume": 2500,
+        "layer": "outer",
+        "slots": ["torso"],
+        "tags": ["armor", "clothing"]
+    },
+    {
+        "id": "helmet_riot",
+        "name": "Riot Helmet",
+        "weight": 1.8,
+        "volume": 3500,
+        "layer": "outer",
+        "slots": ["head"],
+        "tags": ["armor", "clothing"]
+    },
+    {
+        "id": "ring_gold",
+        "name": "Gold Ring",
+        "weight": 0.01,
+        "volume": 1,
+        "slots": ["digit"],
+        "tags": ["jewelry"]
+    },
+    {
+        "id": "combat_knife",
+        "name": "Combat Knife",
+        "weight": 0.4,
+        "volume": 150,
+        "slots": ["grasp"],
+        "tags": ["weapon", "sharp"]
+    },
+    {
+        "id": "baseball_bat",
+        "name": "Aluminum Bat",
+        "weight": 0.9,
+        "volume": 2200,
+        "slots": ["grasp"],
+        "tags": ["weapon", "blunt"]
+    },
+    {
+        "id": "glock_17",
+        "name": "Pistol 9mm",
+        "weight": 0.9,
+        "volume": 600,
+        "slots": ["grasp"],
+        "tags": ["weapon", "gun"]
+    },
+    {
+        "id": "flashlight",
+        "name": "Flashlight",
+        "weight": 0.3,
+        "volume": 250,
+        "slots": ["grasp"],
+        "tags": ["tool", "light"]
+    },
+    {
+        "id": "apple",
+        "name": "Red Apple",
+        "weight": 0.1,
+        "volume": 180,
+        "tags": ["food"]
+    },
+    {
+        "id": "canned_beans",
+        "name": "Canned Beans",
+        "weight": 0.45,
+        "volume": 400,
+        "tags": ["food"]
+    },
+    {
+        "id": "canteen",
+        "name": "Water Canteen",
+        "weight": 1.1,
+        "volume": 1100,
+        "tags": ["drink"]
+    },
+    {
+        "id": "medkit",
+        "name": "First Aid Kit",
+        "weight": 1.0,
+        "volume": 2000,
+        "container_capacity": 1500,
+        "tags": ["medical", "container"]
+    },
+    {
+        "id": "bandage",
+        "name": "Sterile Bandage",
+        "weight": 0.05,
+        "volume": 100,
+        "tags": ["medical"]
+    }
+]

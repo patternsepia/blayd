@@ -1,0 +1,74 @@
+{
+    "default": {
+        "name": "Unkmat",
+        "density": 1.0,
+        "hardness": 1,
+        "flammability": 0.1,
+        "conductive": false,
+        "decay_type": "none"
+    },
+    "oak": {
+        "name": "Wood (Oak)",
+        "density": 0.75,
+        "hardness": 15,
+        "flammability": 0.8,
+        "conductive": false,
+        "decay_type": "rot"
+    },
+    "pine": {
+        "name": "Wood (Pine)",
+        "density": 0.60,
+        "hardness": 10,
+        "flammability": 1.0,
+        "conductive": false,
+        "decay_type": "rot"
+    },
+    "steel": {
+        "name": "Steel",
+        "density": 7.85,
+        "hardness": 60,
+        "flammability": 0.0,
+        "conductive": true,
+        "decay_type": "rust"
+    },
+    "gold": {
+        "name": "Gold",
+        "density": 19.3,
+        "hardness": 20,
+        "flammability": 0.0,
+        "conductive": true,
+        "decay_type": "none"
+    },
+    "cloth_cotton": {
+        "name": "Cotton",
+        "density": 0.5,
+        "hardness": 1,
+        "flammability": 1.5,
+        "conductive": false,
+        "decay_type": "rot"
+    },
+    "flesh": {
+        "name": "Flesh",
+        "density": 1.0,
+        "hardness": 2,
+        "flammability": 0.2,
+        "conductive": true,
+        "decay_type": "decompose"
+    },
+    "stone": {
+        "name": "Granite",
+        "density": 2.7,
+        "hardness": 80,
+        "flammability": 0.0,
+        "conductive": false,
+        "decay_type": "none"
+    },
+    "plastic": {
+        "name": "Plastic",
+        "density": 1.2,
+        "hardness": 20,
+        "flammability": 1.2,
+        "conductive": false,
+        "decay_type": "none"
+    }
+}

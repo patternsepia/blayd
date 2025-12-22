@@ -1,0 +1,25 @@
+{
+  "window": { 
+    "width": 800,
+    "height": 600
+  },
+  "performance": {
+    "fps": 60,
+    "tps": 100,
+    "show_fps": "off",
+    "show_tps": "off"
+  },
+  "audio": {
+    "master_volume":  1.0,
+    "music_volume": 1.0,
+    "sfx_volume": 1.0,
+    "ambient_volume": 1.0,
+    "voice_volume": 1.0
+  },
+  "color": {
+    "encumbrance_scale": "default",
+    "thermal_scale": "default", 
+    "ui_theme": "default",
+    "colorblind_mode": "off"
+  }
+}

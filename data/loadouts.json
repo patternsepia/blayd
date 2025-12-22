@@ -1,0 +1,29 @@
+{
+    "default": [
+        "jeans", 
+        "tshirt", 
+        "boots", 
+        "backpack_large", 
+        "combat_knife", 
+        "apple", 
+        "medkit", 
+        "flashlight"
+    ],
+    "soldier": [
+        "cargo_pants",
+        "ballistic_vest",
+        "helmet_riot",
+        "boots",
+        "glock_17",
+        "medkit",
+        "canteen"
+    ],
+    "civilian": [
+        "jeans",
+        "tshirt",
+        "fanny_pack",
+        "baseball_bat",
+        "apple",
+        "canned_beans"
+    ]
+}

@@ -1,0 +1,1661 @@
+[
+{
+  "humanoid": [
+    {
+      "name": "chest",
+      "tags": [ "torso", "core", "vital" ],
+      "inside": [
+        {
+          "name": "ribcage",
+          "tags": [ "bone", "protection" ],
+          "inside": [
+            { "name": "heart", "tags": [ "organ", "circulatory", "vital" ] },
+            { "name": "left_lung", "tags": [ "organ", "respiratory", "vital" ] },
+            { "name": "right_lung", "tags": [ "organ", "respiratory", "vital" ] }
+          ],
+          "subparts": [
+            { "name": "sternum", "tags": [ "bone", "center" ] },
+            { "name": "ribs", "tags": [ "bone" ], "number": 24 }
+          ]
+        },
+        { "name": "thoracic_vertebrae", "tags": [ "bone", "spine" ], "number": 12 }
+      ],
+      "subparts": [
+        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+        {
+          "name": "neck",
+          "tags": [ "connector", "vital" ],
+          "inside": [
+            { "name": "trachea", "tags": [ "organ", "respiratory", "windpipe" ] },
+            { "name": "esophagus", "tags": [ "organ", "digestive" ] },
+            { "name": "cervical_vertebrae", "tags": [ "bone", "spine" ], "number": 7 }
+          ],
+          "subparts": [
+            {
+              "name": "head",
+              "tags": [ "head", "vital" ],
+              "inside": [
+                {
+                  "name": "skull",
+                  "tags": [ "bone", "protection" ],
+                  "inside": [
+                     { "name": "brain", "tags": [ "organ", "nervous", "vital" ] }
+                  ],
+                  "subparts": [
+                    { "name": "cranium", "tags": [ "bone" ] },
+                    { "name": "mandible", "tags": [ "bone", "jaw" ] }
+                  ]
+                }
+              ],
+              "subparts": [
+                {
+                  "name": "scalp",
+                  "tags": [ "skin", "coverage" ],
+                  "subparts": [
+                    { "name": "hair", "tags": [ "cosmetic" ] }
+                  ]
+                },
+                {
+                  "name": "forehead",
+                  "tags": [ "face", "bone" ],
+                  "subparts": [
+                    { "name": "eyebrow", "tags": ["hair", "cosmetic", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "cheek",
+                  "tags": ["face", "flesh", "cosmetic", "pierceable", "left"]
+                },
+                {
+                  "name": "cheek",
+                  "tags": ["face", "flesh", "cosmetic", "pierceable", "right"]
+                },
+                {
+                  "name": "eye",
+                  "tags": [ "sensory", "vision", "left" ],
+                  "subparts": [
+                    {
+                      "name": "eyelid",
+                      "tags": ["upper", "skin", "protection", "cosmetic"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "cosmetic", "protection"] }]
+                    },
+                    {
+                      "name": "eyelid",
+                      "tags": ["lower", "skin", "protection", "cosmetic"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "cosmetic", "protection"] }]
+                    }
+                  ]
+                },
+                {
+                  "name": "eye",
+                  "tags": [ "sensory", "vision", "right" ],
+                  "subparts": [
+                    {
+                      "name": "eyelid",
+                      "tags": ["upper", "skin", "protection", "cosmetic"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "cosmetic", "protection"] }]
+                    },
+                    {
+                      "name": "eyelid",
+                      "tags": ["lower", "skin", "protection", "cosmetic"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "cosmetic", "protection"] }]
+                    }
+                  ]
+                },
+                {
+                  "name": "ear",
+                  "tags": [ "sensory", "hearing", "left" ],
+                  "subparts": [
+                    { "name": "earlobe", "tags": ["flesh", "cosmetic", "pierceable"] },
+                    { "name": "helix", "tags": ["cartilage", "cosmetic", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "ear",
+                  "tags": [ "sensory", "hearing", "right" ],
+                  "subparts": [
+                    { "name": "earlobe", "tags": ["flesh", "cosmetic", "pierceable"] },
+                    { "name": "helix", "tags": ["cartilage", "cosmetic", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "nose",
+                  "tags": [ "sensory", "smell", "face" ],
+                  "subparts": [
+                    { "name": "nostril", "tags": ["orifice", "pierceable"] },
+                    { "name": "septum", "tags": ["cartilage", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "mouth",
+                  "tags": [ "face", "orifice" ],
+                  "subparts": [
+                    {
+                      "name": "lip",
+                      "tags": [ "upper", "speech", "skin", "cosmetic", "pierceable" ],
+                      "subparts": [
+                        { "name": "moustache", "tags": [ "hair", "cosmetic" ] }
+                      ]
+                    },
+                    {
+                      "name": "lip",
+                      "tags": [ "lower", "speech", "skin", "cosmetic", "pierceable" ]
+                    },
+                    {
+                      "name": "teeth",
+                      "tags": [ "bite", "speech", "bone" ],
+                      "subparts": [
+                        { "name": "incisors", "tags": [ "cut" ], "number": 4 },
+                        { "name": "fangs", "tags": [ "venom", "pierce" ], "number": 2 },
+                        { "name": "molars", "tags": [ "crush" ], "number": 10 }
+                      ]
+                    },
+                    {
+                      "name": "tongue",
+                      "tags": [ "taste", "speech", "flesh", "pierceable" ]
+                    },
+                    {
+                      "name": "gums",
+                      "tags": [ "flesh", "support" ]
+                    }
+                  ]
+                },
+                {
+                  "name": "chin",
+                  "tags": [ "face", "bone" ],
+                  "subparts": [
+                    { "name": "beard", "tags": [ "hair", "cosmetic" ] }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "shoulder",
+          "tags": [ "joint", "arm", "left" ],
+          "inside": [
+             { "name": "scapula", "tags": ["bone", "shoulder_blade"] },
+             { "name": "clavicle", "tags": ["bone", "collarbone"] }
+          ],
+          "subparts": [
+            {
+              "name": "upper_arm",
+              "tags": [ "limb", "arm", "left" ],
+              "inside": [
+                { "name": "humerus", "tags": ["bone"] }
+              ],
+              "subparts": [
+                { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                {
+                  "name": "elbow",
+                  "tags": [ "joint", "arm", "left" ],
+                  "subparts": [
+                    {
+                      "name": "forearm",
+                      "tags": [ "limb", "arm", "left" ],
+                      "inside": [
+                        { "name": "radius", "tags": ["bone"] },
+                        { "name": "ulna", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                        {
+                          "name": "wrist",
+                          "tags": [ "joint", "arm", "left" ],
+                          "inside": [
+                             { "name": "carpals", "tags": ["bone"], "number": 8 }
+                          ],
+                          "subparts": [
+                            {
+                              "name": "hand",
+                              "tags": [ "manipulator", "left" ],
+                              "inside": [
+                                 { "name": "metacarpals", "tags": ["bone"], "number": 5 }
+                              ],
+                              "subparts": [
+                                { "name": "palm", "tags": ["volar", "flesh", "pad"] },
+                                { "name": "dorsal_hand", "tags": ["posterior", "skin", "vein"] },
+                                {
+                                  "name": "thumb",
+                                  "tags": [ "digit", "pollex", "grasp" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                },
+                                {
+                                  "name": "index_finger",
+                                  "tags": [ "digit", "pointer" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                },
+                                {
+                                  "name": "middle_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                },
+                                {
+                                  "name": "ring_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                },
+                                {
+                                  "name": "pinky_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "shoulder",
+          "tags": [ "joint", "arm", "right" ],
+          "inside": [
+             { "name": "scapula", "tags": ["bone", "shoulder_blade"] },
+             { "name": "clavicle", "tags": ["bone", "collarbone"] }
+          ],
+          "subparts": [
+            {
+              "name": "upper_arm",
+              "tags": [ "limb", "arm", "right" ],
+              "inside": [
+                { "name": "humerus", "tags": ["bone"] }
+              ],
+              "subparts": [
+                { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                {
+                  "name": "elbow",
+                  "tags": [ "joint", "arm", "right" ],
+                  "subparts": [
+                    {
+                      "name": "forearm",
+                      "tags": [ "limb", "arm", "right" ],
+                      "inside": [
+                        { "name": "radius", "tags": ["bone"] },
+                        { "name": "ulna", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                        {
+                          "name": "wrist",
+                          "tags": [ "joint", "arm", "right" ],
+                          "inside": [
+                             { "name": "carpals", "tags": ["bone"], "number": 8 }
+                          ],
+                          "subparts": [
+                            {
+                              "name": "hand",
+                              "tags": [ "manipulator", "right" ],
+                              "inside": [
+                                 { "name": "metacarpals", "tags": ["bone"], "number": 5 }
+                              ],
+                              "subparts": [
+                                { "name": "palm", "tags": ["volar", "flesh", "pad"] },
+                                { "name": "dorsal_hand", "tags": ["posterior", "skin", "vein"] },
+                                {
+                                  "name": "thumb",
+                                  "tags": [ "digit", "pollex", "grasp" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                },
+                                {
+                                  "name": "index_finger",
+                                  "tags": [ "digit", "pointer" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                },
+                                {
+                                  "name": "middle_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                },
+                                {
+                                  "name": "ring_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                },
+                                {
+                                  "name": "pinky_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "abdomen",
+          "tags": [ "torso", "vital", "soft" ],
+          "inside": [
+            { "name": "stomach", "tags": [ "organ", "digestive" ] },
+            { "name": "liver", "tags": [ "organ", "filtration" ] },
+            { "name": "kidney", "tags": [ "organ", "filtration", "left" ] },
+            { "name": "kidney", "tags": [ "organ", "filtration", "right" ] },
+            { "name": "intestines", "tags": [ "organ", "digestive" ] },
+            { "name": "lumbar_vertebrae", "tags": [ "bone", "spine" ], "number": 5 }
+          ],
+          "subparts": [
+            { "name": "navel", "tags": [ "scar", "center", "cosmetic", "pierceable" ] },
+            { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+            {
+              "name": "pelvis",
+              "tags": [ "torso", "bone", "connector" ],
+              "inside": [
+                {
+                  "name": "pelvis_bone",
+                  "tags": [ "bone" ],
+                  "inside": [
+                    { "name": "bladder", "tags": [ "organ", "excretory" ] },
+                    { "name": "reproductive_organs", "tags": [ "organ", "reproduction" ] }
+                  ]
+                }
+              ],
+              "subparts": [
+                {
+                  "name": "hip",
+                  "tags": [ "joint", "leg", "left" ],
+                  "subparts": [
+                    {
+                      "name": "thigh",
+                      "tags": [ "limb", "leg", "left" ],
+                      "inside": [
+                        { "name": "femur", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                        {
+                          "name": "knee",
+                          "tags": [ "joint", "leg", "left" ],
+                          "subparts": [
+                            {
+                              "name": "lower_leg",
+                              "tags": [ "limb", "leg", "left" ],
+                              "inside": [
+                                { "name": "tibia", "tags": ["bone"] },
+                                { "name": "fibula", "tags": ["bone"] }
+                              ],
+                              "subparts": [
+                                { "name": "shin", "tags": [ "bone", "anterior" ] },
+                                { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                                {
+                                  "name": "ankle",
+                                  "tags": [ "joint", "leg", "left" ],
+                                  "inside": [
+                                     { "name": "tarsals", "tags": ["bone"], "number": 7 }
+                                  ],
+                                  "subparts": [
+                                    {
+                                      "name": "foot",
+                                      "tags": [ "support", "mobility", "left" ],
+                                      "inside": [
+                                         { "name": "metatarsals", "tags": ["bone"], "number": 5 }
+                                      ],
+                                      "subparts": [
+                                        { "name": "sole", "tags": ["plantar", "pad", "flesh"] },
+                                        { "name": "dorsal_foot", "tags": ["superior", "bone", "skin"] },
+                                        {
+                                          "name": "hallux",
+                                          "tags": ["digit", "big_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        },
+                                        {
+                                          "name": "index_toe",
+                                          "tags": ["digit", "long_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        },
+                                        {
+                                          "name": "middle_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        },
+                                        {
+                                          "name": "ring_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        },
+                                        {
+                                          "name": "little_toe",
+                                          "tags": ["digit", "pinky_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "hip",
+                  "tags": [ "joint", "leg", "right" ],
+                  "subparts": [
+                    {
+                      "name": "thigh",
+                      "tags": [ "limb", "leg", "right" ],
+                      "inside": [
+                        { "name": "femur", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                        {
+                          "name": "knee",
+                          "tags": [ "joint", "leg", "right" ],
+                          "subparts": [
+                            {
+                              "name": "lower_leg",
+                              "tags": [ "limb", "leg", "right" ],
+                              "inside": [
+                                { "name": "tibia", "tags": ["bone"] },
+                                { "name": "fibula", "tags": ["bone"] }
+                              ],
+                              "subparts": [
+                                { "name": "shin", "tags": [ "bone", "anterior" ] },
+                                { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                                {
+                                  "name": "ankle",
+                                  "tags": [ "joint", "leg", "right" ],
+                                  "inside": [
+                                     { "name": "tarsals", "tags": ["bone"], "number": 7 }
+                                  ],
+                                  "subparts": [
+                                    {
+                                      "name": "foot",
+                                      "tags": [ "support", "mobility", "right" ],
+                                      "inside": [
+                                         { "name": "metatarsals", "tags": ["bone"], "number": 5 }
+                                      ],
+                                      "subparts": [
+                                        { "name": "sole", "tags": ["plantar", "pad", "flesh"] },
+                                        { "name": "dorsal_foot", "tags": ["superior", "bone", "skin"] },
+                                        {
+                                          "name": "hallux",
+                                          "tags": ["digit", "big_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        },
+                                        {
+                                          "name": "index_toe",
+                                          "tags": ["digit", "long_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        },
+                                        {
+                                          "name": "middle_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        },
+                                        {
+                                          "name": "ring_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        },
+                                        {
+                                          "name": "little_toe",
+                                          "tags": ["digit", "pinky_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic"] }]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "tiefling": [
+    {
+      "name": "chest",
+      "tags": [ "torso", "core", "vital", "infernal" ],
+      "inside": [
+        {
+          "name": "ribcage",
+          "tags": [ "bone", "protection" ],
+          "inside": [
+            { "name": "heart", "tags": [ "organ", "circulatory", "vital" ] },
+            { "name": "left_lung", "tags": [ "organ", "respiratory", "vital" ] },
+            { "name": "right_lung", "tags": [ "organ", "respiratory", "vital" ] }
+          ],
+          "subparts": [
+            { "name": "sternum", "tags": [ "bone", "center" ] },
+            { "name": "ribs", "tags": [ "bone" ], "number": 24 }
+          ]
+        },
+        { "name": "thoracic_vertebrae", "tags": [ "bone", "spine" ], "number": 12 }
+      ],
+      "subparts": [
+        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+        {
+          "name": "neck",
+          "tags": [ "connector", "vital" ],
+          "inside": [
+            { "name": "trachea", "tags": [ "organ", "respiratory", "windpipe" ] },
+            { "name": "esophagus", "tags": [ "organ", "digestive" ] },
+            { "name": "cervical_vertebrae", "tags": [ "bone", "spine" ], "number": 7 }
+          ],
+          "subparts": [
+            {
+              "name": "head",
+              "tags": [ "head", "vital" ],
+              "inside": [
+                {
+                  "name": "skull",
+                  "tags": [ "bone", "protection" ],
+                  "inside": [
+                     { "name": "brain", "tags": [ "organ", "nervous", "vital" ] }
+                  ],
+                  "subparts": [
+                    { "name": "cranium", "tags": [ "bone" ] },
+                    { "name": "mandible", "tags": [ "bone", "jaw" ] }
+                  ]
+                }
+              ],
+              "subparts": [
+                {
+                  "name": "scalp",
+                  "tags": [ "skin", "coverage" ],
+                  "subparts": [
+                    { "name": "hair", "tags": [ "cosmetic" ] }
+                  ]
+                },
+                {
+                  "name": "forehead",
+                  "tags": [ "face", "bone" ],
+                  "subparts": [
+                    { "name": "eyebrow", "tags": ["hair", "cosmetic", "pierceable"] },
+                    { 
+                      "name": "left_horn", 
+                      "tags": ["bone", "keratin", "infernal", "horn"],
+                      "subparts": [{ "name": "horn_tip", "tags": ["pierce"] }]
+                    },
+                    { 
+                      "name": "right_horn", 
+                      "tags": ["bone", "keratin", "infernal", "horn"],
+                      "subparts": [{ "name": "horn_tip", "tags": ["pierce"] }]
+                    }
+                  ]
+                },
+                {
+                  "name": "cheek",
+                  "tags": ["face", "flesh", "cosmetic", "pierceable", "left"]
+                },
+                {
+                  "name": "cheek",
+                  "tags": ["face", "flesh", "cosmetic", "pierceable", "right"]
+                },
+                {
+                  "name": "eye",
+                  "tags": [ "sensory", "vision", "left", "darkvision", "infernal" ],
+                  "subparts": [
+                    {
+                      "name": "eyelid",
+                      "tags": ["upper", "skin", "protection", "cosmetic"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "cosmetic", "protection"] }]
+                    },
+                    {
+                      "name": "eyelid",
+                      "tags": ["lower", "skin", "protection", "cosmetic"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "cosmetic", "protection"] }]
+                    }
+                  ]
+                },
+                {
+                  "name": "eye",
+                  "tags": [ "sensory", "vision", "right", "darkvision", "infernal" ],
+                  "subparts": [
+                    {
+                      "name": "eyelid",
+                      "tags": ["upper", "skin", "protection", "cosmetic"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "cosmetic", "protection"] }]
+                    },
+                    {
+                      "name": "eyelid",
+                      "tags": ["lower", "skin", "protection", "cosmetic"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "cosmetic", "protection"] }]
+                    }
+                  ]
+                },
+                {
+                  "name": "ear",
+                  "tags": [ "sensory", "hearing", "left", "pointed" ],
+                  "subparts": [
+                    { "name": "earlobe", "tags": ["flesh", "cosmetic", "pierceable"] },
+                    { "name": "helix", "tags": ["cartilage", "cosmetic", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "ear",
+                  "tags": [ "sensory", "hearing", "right", "pointed" ],
+                  "subparts": [
+                    { "name": "earlobe", "tags": ["flesh", "cosmetic", "pierceable"] },
+                    { "name": "helix", "tags": ["cartilage", "cosmetic", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "nose",
+                  "tags": [ "sensory", "smell", "face" ],
+                  "subparts": [
+                    { "name": "nostril", "tags": ["orifice", "pierceable"] },
+                    { "name": "septum", "tags": ["cartilage", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "mouth",
+                  "tags": [ "face", "orifice" ],
+                  "subparts": [
+                    {
+                      "name": "lip",
+                      "tags": [ "upper", "speech", "skin", "cosmetic", "pierceable" ],
+                      "subparts": [
+                        { "name": "moustache", "tags": [ "hair", "cosmetic" ] }
+                      ]
+                    },
+                    {
+                      "name": "lip",
+                      "tags": [ "lower", "speech", "skin", "cosmetic", "pierceable" ]
+                    },
+                    {
+                      "name": "teeth",
+                      "tags": [ "bite", "speech", "bone" ],
+                      "subparts": [
+                        { "name": "incisors", "tags": [ "cut" ], "number": 4 },
+                        { "name": "fangs", "tags": [ "venom", "pierce", "infernal" ], "number": 4 },
+                        { "name": "molars", "tags": [ "crush" ], "number": 8 }
+                      ]
+                    },
+                    {
+                      "name": "tongue",
+                      "tags": [ "taste", "speech", "flesh", "pierceable" ]
+                    },
+                    {
+                      "name": "gums",
+                      "tags": [ "flesh", "support" ]
+                    }
+                  ]
+                },
+                {
+                  "name": "chin",
+                  "tags": [ "face", "bone" ],
+                  "subparts": [
+                    { "name": "beard", "tags": [ "hair", "cosmetic" ] }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "shoulder",
+          "tags": [ "joint", "arm", "left" ],
+          "inside": [
+             { "name": "scapula", "tags": ["bone", "shoulder_blade"] },
+             { "name": "clavicle", "tags": ["bone", "collarbone"] }
+          ],
+          "subparts": [
+            {
+              "name": "upper_arm",
+              "tags": [ "limb", "arm", "left" ],
+              "inside": [
+                { "name": "humerus", "tags": ["bone"] }
+              ],
+              "subparts": [
+                { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                {
+                  "name": "elbow",
+                  "tags": [ "joint", "arm", "left" ],
+                  "subparts": [
+                    {
+                      "name": "forearm",
+                      "tags": [ "limb", "arm", "left" ],
+                      "inside": [
+                        { "name": "radius", "tags": ["bone"] },
+                        { "name": "ulna", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                        {
+                          "name": "wrist",
+                          "tags": [ "joint", "arm", "left" ],
+                          "inside": [
+                             { "name": "carpals", "tags": ["bone"], "number": 8 }
+                          ],
+                          "subparts": [
+                            {
+                              "name": "hand",
+                              "tags": [ "manipulator", "left" ],
+                              "inside": [
+                                 { "name": "metacarpals", "tags": ["bone"], "number": 5 }
+                              ],
+                              "subparts": [
+                                { "name": "palm", "tags": ["volar", "flesh", "pad"] },
+                                { "name": "dorsal_hand", "tags": ["posterior", "skin", "vein"] },
+                                {
+                                  "name": "thumb",
+                                  "tags": [ "digit", "pollex", "grasp" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                },
+                                {
+                                  "name": "index_finger",
+                                  "tags": [ "digit", "pointer" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                },
+                                {
+                                  "name": "middle_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                },
+                                {
+                                  "name": "ring_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                },
+                                {
+                                  "name": "pinky_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "shoulder",
+          "tags": [ "joint", "arm", "right" ],
+          "inside": [
+             { "name": "scapula", "tags": ["bone", "shoulder_blade"] },
+             { "name": "clavicle", "tags": ["bone", "collarbone"] }
+          ],
+          "subparts": [
+            {
+              "name": "upper_arm",
+              "tags": [ "limb", "arm", "right" ],
+              "inside": [
+                { "name": "humerus", "tags": ["bone"] }
+              ],
+              "subparts": [
+                { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                {
+                  "name": "elbow",
+                  "tags": [ "joint", "arm", "right" ],
+                  "subparts": [
+                    {
+                      "name": "forearm",
+                      "tags": [ "limb", "arm", "right" ],
+                      "inside": [
+                        { "name": "radius", "tags": ["bone"] },
+                        { "name": "ulna", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                        {
+                          "name": "wrist",
+                          "tags": [ "joint", "arm", "right" ],
+                          "inside": [
+                             { "name": "carpals", "tags": ["bone"], "number": 8 }
+                          ],
+                          "subparts": [
+                            {
+                              "name": "hand",
+                              "tags": [ "manipulator", "right" ],
+                              "inside": [
+                                 { "name": "metacarpals", "tags": ["bone"], "number": 5 }
+                              ],
+                              "subparts": [
+                                { "name": "palm", "tags": ["volar", "flesh", "pad"] },
+                                { "name": "dorsal_hand", "tags": ["posterior", "skin", "vein"] },
+                                {
+                                  "name": "thumb",
+                                  "tags": [ "digit", "pollex", "grasp" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                },
+                                {
+                                  "name": "index_finger",
+                                  "tags": [ "digit", "pointer" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                },
+                                {
+                                  "name": "middle_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                },
+                                {
+                                  "name": "ring_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                },
+                                {
+                                  "name": "pinky_finger",
+                                  "tags": [ "digit" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "fingernail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "abdomen",
+          "tags": [ "torso", "vital", "soft" ],
+          "inside": [
+            { "name": "stomach", "tags": [ "organ", "digestive" ] },
+            { "name": "liver", "tags": [ "organ", "filtration" ] },
+            { "name": "kidney", "tags": [ "organ", "filtration", "left" ] },
+            { "name": "kidney", "tags": [ "organ", "filtration", "right" ] },
+            { "name": "intestines", "tags": [ "organ", "digestive" ] },
+            { "name": "lumbar_vertebrae", "tags": [ "bone", "spine" ], "number": 5 }
+          ],
+          "subparts": [
+            { "name": "navel", "tags": [ "scar", "center", "cosmetic", "pierceable" ] },
+            { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+            {
+              "name": "pelvis",
+              "tags": [ "torso", "bone", "connector" ],
+              "inside": [
+                {
+                  "name": "pelvis_bone",
+                  "tags": [ "bone" ],
+                  "inside": [
+                    { "name": "bladder", "tags": [ "organ", "excretory" ] },
+                    { "name": "reproductive_organs", "tags": [ "organ", "reproduction" ] }
+                  ]
+                }
+              ],
+              "subparts": [
+                {
+                   "name": "tail",
+                   "tags": ["limb", "appendage", "infernal", "balance"],
+                   "inside": [
+                      { "name": "caudal_vertebrae", "tags": ["bone", "spine"], "number": 20 }
+                   ],
+                   "subparts": [
+                      { "name": "tail_tip", "tags": ["flesh", "cosmetic", "spaded"] }
+                   ]
+                },
+                {
+                  "name": "hip",
+                  "tags": [ "joint", "leg", "left" ],
+                  "subparts": [
+                    {
+                      "name": "thigh",
+                      "tags": [ "limb", "leg", "left" ],
+                      "inside": [
+                        { "name": "femur", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                        {
+                          "name": "knee",
+                          "tags": [ "joint", "leg", "left" ],
+                          "subparts": [
+                            {
+                              "name": "lower_leg",
+                              "tags": [ "limb", "leg", "left" ],
+                              "inside": [
+                                { "name": "tibia", "tags": ["bone"] },
+                                { "name": "fibula", "tags": ["bone"] }
+                              ],
+                              "subparts": [
+                                { "name": "shin", "tags": [ "bone", "anterior" ] },
+                                { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                                {
+                                  "name": "ankle",
+                                  "tags": [ "joint", "leg", "left" ],
+                                  "inside": [
+                                     { "name": "tarsals", "tags": ["bone"], "number": 7 }
+                                  ],
+                                  "subparts": [
+                                    {
+                                      "name": "foot",
+                                      "tags": [ "support", "mobility", "left" ],
+                                      "inside": [
+                                         { "name": "metatarsals", "tags": ["bone"], "number": 5 }
+                                      ],
+                                      "subparts": [
+                                        { "name": "sole", "tags": ["plantar", "pad", "flesh"] },
+                                        { "name": "dorsal_foot", "tags": ["superior", "bone", "skin"] },
+                                        {
+                                          "name": "hallux",
+                                          "tags": ["digit", "big_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        },
+                                        {
+                                          "name": "index_toe",
+                                          "tags": ["digit", "long_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        },
+                                        {
+                                          "name": "middle_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        },
+                                        {
+                                          "name": "ring_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        },
+                                        {
+                                          "name": "little_toe",
+                                          "tags": ["digit", "pinky_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "hip",
+                  "tags": [ "joint", "leg", "right" ],
+                  "subparts": [
+                    {
+                      "name": "thigh",
+                      "tags": [ "limb", "leg", "right" ],
+                      "inside": [
+                        { "name": "femur", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                        {
+                          "name": "knee",
+                          "tags": [ "joint", "leg", "right" ],
+                          "subparts": [
+                            {
+                              "name": "lower_leg",
+                              "tags": [ "limb", "leg", "right" ],
+                              "inside": [
+                                { "name": "tibia", "tags": ["bone"] },
+                                { "name": "fibula", "tags": ["bone"] }
+                              ],
+                              "subparts": [
+                                { "name": "shin", "tags": [ "bone", "anterior" ] },
+                                { "name": "body_hair", "tags": [ "cosmetic", "hair" ] },
+                                {
+                                  "name": "ankle",
+                                  "tags": [ "joint", "leg", "right" ],
+                                  "inside": [
+                                     { "name": "tarsals", "tags": ["bone"], "number": 7 }
+                                  ],
+                                  "subparts": [
+                                    {
+                                      "name": "foot",
+                                      "tags": [ "support", "mobility", "right" ],
+                                      "inside": [
+                                         { "name": "metatarsals", "tags": ["bone"], "number": 5 }
+                                      ],
+                                      "subparts": [
+                                        { "name": "sole", "tags": ["plantar", "pad", "flesh"] },
+                                        { "name": "dorsal_foot", "tags": ["superior", "bone", "skin"] },
+                                        {
+                                          "name": "hallux",
+                                          "tags": ["digit", "big_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        },
+                                        {
+                                          "name": "index_toe",
+                                          "tags": ["digit", "long_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        },
+                                        {
+                                          "name": "middle_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        },
+                                        {
+                                          "name": "ring_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        },
+                                        {
+                                          "name": "little_toe",
+                                          "tags": ["digit", "pinky_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "toenail", "tags": ["keratin", "protection", "cosmetic", "claw"] }]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "goblin": [
+    {
+      "name": "chest",
+      "tags": [ "torso", "core", "vital", "small" ],
+      "inside": [
+        {
+          "name": "ribcage",
+          "tags": [ "bone", "protection", "compressed" ],
+          "inside": [
+            { "name": "heart", "tags": [ "organ", "circulatory", "vital", "fast_beat" ] },
+            { "name": "left_lung", "tags": [ "organ", "respiratory", "vital" ] },
+            { "name": "right_lung", "tags": [ "organ", "respiratory", "vital" ] }
+          ],
+          "subparts": [
+            { "name": "sternum", "tags": [ "bone", "center" ] },
+            { "name": "ribs", "tags": [ "bone" ], "number": 24 }
+          ]
+        },
+        { "name": "thoracic_vertebrae", "tags": [ "bone", "spine" ], "number": 12 }
+      ],
+      "subparts": [
+        { "name": "patchy_hair", "tags": [ "cosmetic", "hair", "greasy" ] },
+        {
+          "name": "neck",
+          "tags": [ "connector", "vital", "scrawny" ],
+          "inside": [
+            { "name": "trachea", "tags": [ "organ", "respiratory", "windpipe" ] },
+            { "name": "esophagus", "tags": [ "organ", "digestive" ] },
+            { "name": "cervical_vertebrae", "tags": [ "bone", "spine" ], "number": 7 }
+          ],
+          "subparts": [
+            {
+              "name": "head",
+              "tags": [ "head", "vital", "oversized" ],
+              "inside": [
+                {
+                  "name": "skull",
+                  "tags": [ "bone", "protection", "flat" ],
+                  "inside": [
+                     { "name": "brain", "tags": [ "organ", "nervous", "vital", "cunning" ] }
+                  ],
+                  "subparts": [
+                    { "name": "cranium", "tags": [ "bone", "flat_top" ] },
+                    { "name": "mandible", "tags": [ "bone", "jaw", "protruding" ] }
+                  ]
+                }
+              ],
+              "subparts": [
+                {
+                  "name": "scalp",
+                  "tags": [ "skin", "coverage" ],
+                  "subparts": [
+                    { "name": "hair", "tags": [ "cosmetic", "sparse" ] }
+                  ]
+                },
+                {
+                  "name": "forehead",
+                  "tags": [ "face", "bone", "sloped" ],
+                  "subparts": [
+                    { "name": "brow_ridge", "tags": ["bone", "pronounced"] }
+                  ]
+                },
+                {
+                  "name": "cheek",
+                  "tags": ["face", "flesh", "gaunt", "left"]
+                },
+                {
+                  "name": "cheek",
+                  "tags": ["face", "flesh", "gaunt", "right"]
+                },
+                {
+                  "name": "eye",
+                  "tags": [ "sensory", "vision", "darkvision", "left" ],
+                  "subparts": [
+                    {
+                      "name": "eyelid",
+                      "tags": ["upper", "skin", "protection"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "protection"] }]
+                    },
+                    {
+                      "name": "eyelid",
+                      "tags": ["lower", "skin", "protection"]
+                    }
+                  ]
+                },
+                {
+                  "name": "eye",
+                  "tags": [ "sensory", "vision", "darkvision", "right" ],
+                  "subparts": [
+                    {
+                      "name": "eyelid",
+                      "tags": ["upper", "skin", "protection"],
+                      "subparts": [{ "name": "eyelashes", "tags": ["hair", "protection"] }]
+                    },
+                    {
+                      "name": "eyelid",
+                      "tags": ["lower", "skin", "protection"]
+                    }
+                  ]
+                },
+                {
+                  "name": "ear",
+                  "tags": [ "sensory", "hearing", "left", "pointed", "large" ],
+                  "subparts": [
+                    { "name": "pinna", "tags": ["cartilage", "mobile", "pierceable"] },
+                    { "name": "ear_tip", "tags": ["cartilage", "sharp", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "ear",
+                  "tags": [ "sensory", "hearing", "right", "pointed", "large" ],
+                  "subparts": [
+                    { "name": "pinna", "tags": ["cartilage", "mobile", "pierceable"] },
+                    { "name": "ear_tip", "tags": ["cartilage", "sharp", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "nose",
+                  "tags": [ "sensory", "smell", "face", "flat" ],
+                  "subparts": [
+                    { "name": "nostril", "tags": ["orifice", "wide"] },
+                    { "name": "septum", "tags": ["cartilage", "pierceable"] }
+                  ]
+                },
+                {
+                  "name": "mouth",
+                  "tags": [ "face", "orifice", "wide" ],
+                  "subparts": [
+                    {
+                      "name": "lip",
+                      "tags": [ "upper", "speech", "skin", "thin" ]
+                    },
+                    {
+                      "name": "lip",
+                      "tags": [ "lower", "speech", "skin", "thin" ]
+                    },
+                    {
+                      "name": "teeth",
+                      "tags": [ "bite", "speech", "bone", "jagged" ],
+                      "subparts": [
+                        { "name": "needle_incisors", "tags": [ "cut", "sharp" ], "number": 6 },
+                        { "name": "fangs", "tags": [ "pierce", "prominent" ], "number": 4 },
+                        { "name": "serrated_molars", "tags": [ "crush", "grind" ], "number": 12 }
+                      ]
+                    },
+                    {
+                      "name": "tongue",
+                      "tags": [ "taste", "speech", "flesh", "long" ]
+                    },
+                    {
+                      "name": "gums",
+                      "tags": [ "flesh", "receding" ]
+                    }
+                  ]
+                },
+                {
+                  "name": "chin",
+                  "tags": [ "face", "bone", "pointed" ],
+                  "subparts": [
+                    { "name": "warts", "tags": [ "flesh", "cosmetic" ] }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "shoulder",
+          "tags": [ "joint", "arm", "left", "slumped" ],
+          "inside": [
+             { "name": "scapula", "tags": ["bone", "shoulder_blade"] },
+             { "name": "clavicle", "tags": ["bone", "collarbone"] }
+          ],
+          "subparts": [
+            {
+              "name": "upper_arm",
+              "tags": [ "limb", "arm", "left", "long" ],
+              "inside": [
+                { "name": "humerus", "tags": ["bone"] }
+              ],
+              "subparts": [
+                {
+                  "name": "elbow",
+                  "tags": [ "joint", "arm", "left", "knobby" ],
+                  "subparts": [
+                    {
+                      "name": "forearm",
+                      "tags": [ "limb", "arm", "left", "sinewy" ],
+                      "inside": [
+                        { "name": "radius", "tags": ["bone"] },
+                        { "name": "ulna", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        {
+                          "name": "wrist",
+                          "tags": [ "joint", "arm", "left" ],
+                          "inside": [
+                             { "name": "carpals", "tags": ["bone"], "number": 8 }
+                          ],
+                          "subparts": [
+                            {
+                              "name": "hand",
+                              "tags": [ "manipulator", "left", "large" ],
+                              "inside": [
+                                 { "name": "metacarpals", "tags": ["bone"], "number": 5 }
+                              ],
+                              "subparts": [
+                                { "name": "palm", "tags": ["volar", "flesh", "rough"] },
+                                { "name": "dorsal_hand", "tags": ["posterior", "skin", "veiny"] },
+                                {
+                                  "name": "thumb",
+                                  "tags": [ "digit", "pollex", "grasp" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                },
+                                {
+                                  "name": "index_finger",
+                                  "tags": [ "digit", "pointer", "nimble" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                },
+                                {
+                                  "name": "middle_finger",
+                                  "tags": [ "digit", "nimble" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                },
+                                {
+                                  "name": "ring_finger",
+                                  "tags": [ "digit", "nimble" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                },
+                                {
+                                  "name": "pinky_finger",
+                                  "tags": [ "digit", "nimble" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "shoulder",
+          "tags": [ "joint", "arm", "right", "slumped" ],
+          "inside": [
+             { "name": "scapula", "tags": ["bone", "shoulder_blade"] },
+             { "name": "clavicle", "tags": ["bone", "collarbone"] }
+          ],
+          "subparts": [
+            {
+              "name": "upper_arm",
+              "tags": [ "limb", "arm", "right", "long" ],
+              "inside": [
+                { "name": "humerus", "tags": ["bone"] }
+              ],
+              "subparts": [
+                {
+                  "name": "elbow",
+                  "tags": [ "joint", "arm", "right", "knobby" ],
+                  "subparts": [
+                    {
+                      "name": "forearm",
+                      "tags": [ "limb", "arm", "right", "sinewy" ],
+                      "inside": [
+                        { "name": "radius", "tags": ["bone"] },
+                        { "name": "ulna", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        {
+                          "name": "wrist",
+                          "tags": [ "joint", "arm", "right" ],
+                          "inside": [
+                             { "name": "carpals", "tags": ["bone"], "number": 8 }
+                          ],
+                          "subparts": [
+                            {
+                              "name": "hand",
+                              "tags": [ "manipulator", "right", "large" ],
+                              "inside": [
+                                 { "name": "metacarpals", "tags": ["bone"], "number": 5 }
+                              ],
+                              "subparts": [
+                                { "name": "palm", "tags": ["volar", "flesh", "rough"] },
+                                { "name": "dorsal_hand", "tags": ["posterior", "skin", "veiny"] },
+                                {
+                                  "name": "thumb",
+                                  "tags": [ "digit", "pollex", "grasp" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                },
+                                {
+                                  "name": "index_finger",
+                                  "tags": [ "digit", "pointer", "nimble" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                },
+                                {
+                                  "name": "middle_finger",
+                                  "tags": [ "digit", "nimble" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                },
+                                {
+                                  "name": "ring_finger",
+                                  "tags": [ "digit", "nimble" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                },
+                                {
+                                  "name": "pinky_finger",
+                                  "tags": [ "digit", "nimble" ],
+                                  "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                  "subparts": [{ "name": "claw", "tags": ["keratin", "weapon", "scratch", "dirty"] }]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "abdomen",
+          "tags": [ "torso", "vital", "soft" ],
+          "inside": [
+            { "name": "stomach", "tags": [ "organ", "digestive", "robust" ] },
+            { "name": "liver", "tags": [ "organ", "filtration" ] },
+            { "name": "kidney", "tags": [ "organ", "filtration", "left" ] },
+            { "name": "kidney", "tags": [ "organ", "filtration", "right" ] },
+            { "name": "intestines", "tags": [ "organ", "digestive", "short" ] },
+            { "name": "lumbar_vertebrae", "tags": [ "bone", "spine" ], "number": 5 }
+          ],
+          "subparts": [
+            { "name": "navel", "tags": [ "scar", "center", "cosmetic" ] },
+            { "name": "patchy_hair", "tags": [ "cosmetic", "hair" ] },
+            {
+              "name": "pelvis",
+              "tags": [ "torso", "bone", "connector", "narrow" ],
+              "inside": [
+                {
+                  "name": "pelvis_bone",
+                  "tags": [ "bone" ],
+                  "inside": [
+                    { "name": "bladder", "tags": [ "organ", "excretory" ] },
+                    { "name": "reproductive_organs", "tags": [ "organ", "reproduction" ] }
+                  ]
+                }
+              ],
+              "subparts": [
+                {
+                  "name": "hip",
+                  "tags": [ "joint", "leg", "left" ],
+                  "subparts": [
+                    {
+                      "name": "thigh",
+                      "tags": [ "limb", "leg", "left", "short" ],
+                      "inside": [
+                        { "name": "femur", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        {
+                          "name": "knee",
+                          "tags": [ "joint", "leg", "left", "knobby" ],
+                          "subparts": [
+                            {
+                              "name": "lower_leg",
+                              "tags": [ "limb", "leg", "left", "bowed" ],
+                              "inside": [
+                                { "name": "tibia", "tags": ["bone"] },
+                                { "name": "fibula", "tags": ["bone"] }
+                              ],
+                              "subparts": [
+                                { "name": "shin", "tags": [ "bone", "anterior" ] },
+                                { "name": "patchy_hair", "tags": [ "cosmetic", "hair" ] },
+                                {
+                                  "name": "ankle",
+                                  "tags": [ "joint", "leg", "left" ],
+                                  "inside": [
+                                     { "name": "tarsals", "tags": ["bone"], "number": 7 }
+                                  ],
+                                  "subparts": [
+                                    {
+                                      "name": "foot",
+                                      "tags": [ "support", "mobility", "left", "flat" ],
+                                      "inside": [
+                                         { "name": "metatarsals", "tags": ["bone"], "number": 5 }
+                                      ],
+                                      "subparts": [
+                                        { "name": "sole", "tags": ["plantar", "pad", "flesh", "calloused"] },
+                                        { "name": "dorsal_foot", "tags": ["superior", "bone", "skin"] },
+                                        {
+                                          "name": "hallux",
+                                          "tags": ["digit", "big_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        },
+                                        {
+                                          "name": "index_toe",
+                                          "tags": ["digit", "long_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        },
+                                        {
+                                          "name": "middle_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        },
+                                        {
+                                          "name": "ring_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        },
+                                        {
+                                          "name": "little_toe",
+                                          "tags": ["digit", "pinky_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "hip",
+                  "tags": [ "joint", "leg", "right" ],
+                  "subparts": [
+                    {
+                      "name": "thigh",
+                      "tags": [ "limb", "leg", "right", "short" ],
+                      "inside": [
+                        { "name": "femur", "tags": ["bone"] }
+                      ],
+                      "subparts": [
+                        {
+                          "name": "knee",
+                          "tags": [ "joint", "leg", "right", "knobby" ],
+                          "subparts": [
+                            {
+                              "name": "lower_leg",
+                              "tags": [ "limb", "leg", "right", "bowed" ],
+                              "inside": [
+                                { "name": "tibia", "tags": ["bone"] },
+                                { "name": "fibula", "tags": ["bone"] }
+                              ],
+                              "subparts": [
+                                { "name": "shin", "tags": [ "bone", "anterior" ] },
+                                { "name": "patchy_hair", "tags": [ "cosmetic", "hair" ] },
+                                {
+                                  "name": "ankle",
+                                  "tags": [ "joint", "leg", "right" ],
+                                  "inside": [
+                                     { "name": "tarsals", "tags": ["bone"], "number": 7 }
+                                  ],
+                                  "subparts": [
+                                    {
+                                      "name": "foot",
+                                      "tags": [ "support", "mobility", "right", "flat" ],
+                                      "inside": [
+                                         { "name": "metatarsals", "tags": ["bone"], "number": 5 }
+                                      ],
+                                      "subparts": [
+                                        { "name": "sole", "tags": ["plantar", "pad", "flesh", "calloused"] },
+                                        { "name": "dorsal_foot", "tags": ["superior", "bone", "skin"] },
+                                        {
+                                          "name": "hallux",
+                                          "tags": ["digit", "big_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 2 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        },
+                                        {
+                                          "name": "index_toe",
+                                          "tags": ["digit", "long_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        },
+                                        {
+                                          "name": "middle_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        },
+                                        {
+                                          "name": "ring_toe",
+                                          "tags": ["digit"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        },
+                                        {
+                                          "name": "little_toe",
+                                          "tags": ["digit", "pinky_toe"],
+                                          "inside": [{ "name": "phalanges", "tags": ["bone"], "number": 3 }],
+                                          "subparts": [{ "name": "claw", "tags": ["keratin", "protection", "scratch", "dirty"] }]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+]
