@@ -1,36 +1,55 @@
 import pygame
 import sys
+from typing import List, Optional
 
 class GameState:
-    """Base class for all game states (Roaming, Inventory, Menus)."""
+    """
+    Base class for all game states (Roaming, Inventory, Menus).
+    """
     def __init__(self, game):
         self.game = game
 
-    def enter(self): pass
-    def exit(self): pass
-    def handle_input(self, event): pass
-    def update(self): pass
-    def draw(self, screen): pass
+    def enter(self): 
+        """Called when state becomes active."""
+        pass
+        
+    def exit(self): 
+        """Called when state is popped or paused."""
+        pass
+        
+    def handle_input(self, event: pygame.event.Event): 
+        """Handle raw Pygame events."""
+        pass
+        
+    def update(self): 
+        """Per-frame logic update."""
+        pass
+        
+    def draw(self, screen: pygame.Surface): 
+        """Render to the screen."""
+        pass
 
 class StateManager:
     def __init__(self, game):
         self.game = game
-        self.stack = []
+        self.stack: List[GameState] = []
 
-    def push(self, state):
+    def push(self, state: GameState):
+        """Pauses current state and enters new state."""
         if self.stack:
-            self.stack[-1].exit() # Pause previous state
+            self.stack[-1].exit()
         self.stack.append(state)
         state.enter()
 
     def pop(self):
+        """Exits current state and resumes previous."""
         if self.stack:
             exiting = self.stack.pop()
             exiting.exit()
         if self.stack:
-            self.stack[-1].enter() # Resume previous state
+            self.stack[-1].enter()
 
-    def set(self, state):
+    def set(self, state: GameState):
         """Clears stack and sets new root state."""
         while self.stack:
             self.stack.pop().exit()
@@ -38,6 +57,9 @@ class StateManager:
         state.enter()
 
     def handle_input(self):
+        """
+        Polls Pygame event queue and passes events to the top state.
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.game.running = False
@@ -51,8 +73,7 @@ class StateManager:
         if self.stack:
             self.stack[-1].update()
 
-    def draw(self, screen):
-        # Draw from bottom up so backgrounds persist (e.g. Inventory over Gameplay)
-        # Or just draw top if it's opaque. For simplicity, draw all:
+    def draw(self, screen: pygame.Surface):
+        # Draw from bottom up so backgrounds persist
         for state in self.stack:
             state.draw(screen)

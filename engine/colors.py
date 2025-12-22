@@ -1,192 +1,205 @@
 import pygame
-import hsluv
 import spectra as sp
-import sys 
+import hsluv
+import sys
+from typing import Union, List, Tuple, Dict, Any, Optional
 
-# 1. LOAD PYGAME COLORS
+# --- 1. MODULE SELF-REFERENCE ---
 _this_module = sys.modules[__name__]
-for name, rgb in pygame.color.THECOLORS.items():
-    setattr(_this_module, name.upper(), rgb)
-    globals()[name.upper()] = rgb
 
-# 2. DEFINE CUSTOM THEME COLORS (That Pygame may not have)
+# --- 2. INJECT STANDARD PYGAME COLORS ---
+# Allows usage like cn.RED or cn.MINTCREAM immediately.
+if pygame.get_init():
+    for name, rgb in pygame.color.THECOLORS.items():
+        # Inject into module namespace (cn.RED)
+        setattr(_this_module, name.upper(), rgb)
+
+# --- 3. CUSTOM COLOR GENERATORS ---
 
 def GRIS(v: int) -> pygame.Color:
-    """
-    Returns a grey color tuple (v, v, v).
-    """
-    # Safety clamp to prevent crashes if v is out of bounds
+    """Returns a robust grey color tuple (v, v, v)."""
     val = max(0, min(255, int(v)))
-    return (val, val, val)
+    return pygame.Color(val, val, val)
 
-# 2. Leverage GRIS to generate cn.GRIS0 through cn.GRIS255
-# Note: Pygame uses GRAY0 - GRAY100, and GREY0 - GREY100, as pct grayness, but we use absolute values.
-# This allows us to type cn.GRIS69 or cn.GRIS120 anywhere in ourr code.
+# Generate cn.GRIS0 through cn.GRIS255
 for i in range(256):
     setattr(_this_module, f"GRIS{i}", GRIS(i))
 
-def df_scale(colors_list):
+# --- 4. THE "JUST WORKS" RESOLVER ---
+
+def get(value: Union[str, Tuple, List, Dict, pygame.Color]) -> pygame.Color:
     """
-    A smart wrapper for sp.scale().
-    It accepts a list containing EITHER strings ("red") OR pygame.Color objects.
-    It automatically converts Color objects to the Hex strings that Spectra needs.
+    The universal color resolver. 
+    Pass anything reasonable, get a pygame.Color object.
+    
+    Usage:
+        cn.get("red")             -> Color(255, 0, 0)
+        cn.get("GRIS128")         -> Color(128, 128, 128)
+        cn.get("cornflowerblue")  -> Color(100, 149, 237)
+        cn.get((0, 255, 0))       -> Color(0, 255, 0)
+    """
+    # 1. Already a Color object?
+    if isinstance(value, pygame.Color):
+        return value
+
+    # 2. Tuple or List? (Assume RGB or RGBA)
+    if isinstance(value, (tuple, list)):
+        return pygame.Color(*value)
+
+    # 3. Dictionary? (Handle JSON data structures)
+    if isinstance(value, dict):
+        if "color" in value: return get(value["color"])
+        if "name" in value:  return get(value["name"])
+        if "hex" in value:   return get(value["hex"])
+        # Fallback for simple dicts like {'r': 255, 'g': 0, 'b': 0}
+        r = value.get('r', 0)
+        g = value.get('g', 0)
+        b = value.get('b', 0)
+        a = value.get('a', 255)
+        return pygame.Color(r, g, b, a)
+
+    # 4. String? (The magic part)
+    if isinstance(value, str):
+        # A. Check our module constants (e.g., "GRIS50", "MIDNIGHTBLUE")
+        if hasattr(_this_module, value):
+            return getattr(_this_module, value)
+        if hasattr(_this_module, value.upper()):
+            return getattr(_this_module, value.upper())
+
+        # B. Check Standard Pygame/Hex/HTML names
+        try:
+            return pygame.Color(value)
+        except ValueError:
+            pass
+            
+    # 5. Fallback (Bright Pink to indicate error visibly)
+    print(f"[Color] Warning: Could not resolve color '{value}'. returning MAGENTA.")
+    return pygame.Color("magenta")
+
+# --- 5. SPECTRA INTEGRATION ---
+
+def df_scale(colors_list: List[Any]):
+    """
+    Smart wrapper for spectra.scale().
+    Accepts mix of strings, tuples, or pygame.Colors.
     """
     sanitized = []
     for c in colors_list:
-        if isinstance(c, (tuple, list)):
-            # It's a Color object -> Auto-convert to Hex
-            sanitized.append("#%02x%02x%02x" % c[:3])
-        else:
-            # It's already a string -> Keep it as is
-            sanitized.append(c)
+        # Use our universal getter to resolve it to a Color first
+        col = get(c)
+        # Spectra prefers Hex strings
+        sanitized.append("#%02x%02x%02x" % (col.r, col.g, col.b))
             
     return sp.scale(sanitized)    
 
-# --- 1. Procedural Entity Colors ---
+# --- 6. PALETTES & THEMES ---
 
-# --- 2. Lighting & Atmosphere ---
-# Define a color cycle for the day-night cycle using Spectra
-# define keyframes: Midnight -> Dawn -> Noon -> Dusk -> Midnight
-# Now you can mix and match strings and Constants seamlessly!
+# Day-Night Cycle
 _cycle = df_scale([
-    MIDNIGHTBLUE,   # Uses the injected Pygame constant
-    LIGHTSALMON,    # Uses the injected Pygame constant
-    WHITE,        # Works with raw strings too!
-    THISTLE,        
-    MIDNIGHTBLUE
+    "midnightblue", 
+    "lightsalmon",    
+    "white",        
+    "thistle",        
+    "midnightblue"
 ])
-def get_day_night_cycle(t: float) -> tuple:
-    """
-    t: float from 0.0 (midnight) -> 0.5 (noon) -> 1.0 (midnight).
-    Returns the ambient light color for the world.
-    """
-    return tuple(int(c) for c in _cycle(t).to("rgb").values)
 
-# --- 3. UI & Feedback (Spectra & Pygame) ---
+def get_day_night_cycle(t: float) -> Tuple[int, int, int]:
+    """t: 0.0 (midnight) -> 0.5 (noon) -> 1.0 (midnight)."""
+    vals = _cycle(t).to("rgb").values
+    return tuple(int(c) for c in vals)
 
-# Pre-load bulky colormaps to avoid re-calculating every frame
-_veg = df_scale([SLATEGRAY,SIENNA, FORESTGREEN]).domain([0, 10, 100])
+# Terrain / Encumbrance / Heat
+_veg = df_scale(["slategray", "sienna", "forestgreen"]).domain([0, 10, 100])
+_enc = df_scale(["palegreen", "khaki", "lightsalmon"]).domain([0, 100, 200])
+_heat = df_scale(["skyblue", "palegreen", "khaki", "lightsalmon"]).domain([0, 100, 150, 200])
+
 def get_terrain_color(pct: float) -> pygame.Color:
-    """
-    Returns a terrain color based on elevation.
-    """
-    return pygame.Color(_veg(pct).to("rgb").values)
+    return pygame.Color(*[int(c) for c in _veg(pct).to("rgb").values])
 
-_enc = df_scale([PALEGREEN,KHAKI, LIGHTSALMON]).domain([0, 100, 200])
 def get_enc_color(pct: float) -> pygame.Color:
-    """
-    Returns an encumbrance color based on load.
-    """
-    return pygame.Color(_enc(pct).to("rgb").values)
+    return pygame.Color(*[int(c) for c in _enc(pct).to("rgb").values])
 
-_heat = df_scale([SKYBLUE,PALEGREEN, KHAKI, LIGHTSALMON]).domain([0, 100, 150, 200])
 def get_heat_color(pct: float) -> pygame.Color:
-    """
-    Returns a heat color based on the temp thingy?
-    """
-    # TDOO: What is the temp thingy?
-    return pygame.Color(_heat(pct).to("rgb").values)
+    return pygame.Color(*[int(c) for c in _heat(pct).to("rgb").values])
 
-# --- 5. Weather & Effects (HSLuv/Pygame) ---
+# --- 7. WEATHER & TINTS ---
 
-#TODO Aerosols: fog, mist, smoke, dust, sandstorm, toxic
-
-def apply_weather_tint(original: pygame.Color, weather_type: str) -> tuple:
-    """
-    Tints a sprite or screen color based on weather state.
-    """
+def apply_weather_tint(original: pygame.Color, weather_type: str) -> pygame.Color:
+    original = get(original) # Ensure input is valid
+    
     tints = {
-        "rain": DARKSLATEGREY,  # Dark Blue
-        "sandstorm": SANDYBROWN, # Brown/Yellow
-        "toxic": YELLOWGREEN,    # Green
-        "none": WHITE # No tint
+        "rain":      get("darkslategray"),
+        "sandstorm": get("sandybrown"),
+        "toxic":     get("yellowgreen"),
+        "none":      get("white")
     }
     
-    tint = tints.get(weather_type, pygame.Color(0,0,0))
-    if weather_type == "none":
+    tint = tints.get(weather_type, get("white"))
+    if weather_type == "none" or not tint:
         return original
 
-    # Linear interpolation towards the tint color
-    return original.lerp(tint, 0.3) # 30% tint strength
+    return original.lerp(tint, 0.3)
 
-# --- Internal State ---
-# These are initially set to safe defaults so the game won't crash 
-# if we forget to call configure().
+# --- 8. CONFIGURATION & STATE ---
+
 _SETTINGS = {} 
-_ACTIVE_ENCUMBRANCE = None
-_ACTIVE_THERMAL = None
-_ACTIVE_UI_THEME = None
+_ACTIVE_ENCUMBRANCE = _enc
+_ACTIVE_THERMAL = _heat
+_ACTIVE_UI_THEME = {"text": "whitesmoke", "bg": "black", "highlight": "cornflowerblue"}
 _ACTIVE_CB_MATRIX = None
-
-# --- Registries (The Hardcoded Presets) ---
-_ENCUMBRANCE_SCALES = {
-    "default": _enc,
-    "high_contrast": sp.scale(["#FFFFFF", "#888888", "#000000"]).domain([0, 50, 100]),
-}
-
-_THERMAL_SCALES = {
-    "default": _heat,
-    "industrial": sp.scale(["#222222", "#D4AF37", "#FF4500"]).domain([0, 100, 200]),
-}
-
-_UI_THEMES = {
-    "default": {"text": "#F0F0F0", "bg": "#000000", "highlight": "#AAAAFF"},
-    "paper":   {"text": "#060606", "bg": "#F5F5DC", "highlight": "#451515"},
-}
 
 _CB_MATRICES = {
     "protanopia":  [[0.567, 0.433, 0.0], [0.558, 0.442, 0.0], [0.0, 0.242, 0.758]],
     "deuteranopia":[[0.625, 0.375, 0.0], [0.700, 0.300, 0.0], [0.0, 0.300, 0.700]],
 }
 
-# --- Configuration Hook ---
+# --- REGISTRIES ---
+# Replaced hex with readable names or GRIS values
 
-def configure(settings_data: dict):
-    """
-    Called by main.py. Updates the module's internal state based on JSON data.
-    """
-    global _SETTINGS, _ACTIVE_ENCUMBRANCE, _ACTIVE_THERMAL, _ACTIVE_UI_THEME, _ACTIVE_CB_MATRIX
+_ENCUMBRANCE_SCALES = {
+    "default": _enc,
+    "high_contrast": df_scale(["white", "gray", "black"]).domain([0, 50, 100]),
+}
+
+_THERMAL_SCALES = {
+    "default": _heat,
+    "industrial": df_scale(["GRIS34", "goldenrod", "orangered"]).domain([0, 100, 200]),
+}
+
+_UI_THEMES = {
+    "default": {"text": "whitesmoke", "bg": "black", "highlight": "cornflowerblue"},
+    "paper":   {"text": "GRIS6",      "bg": "beige", "highlight": "maroon"},
+}
+
+def configure(settings_data: Dict[str, Any]):
+    global _SETTINGS, _ACTIVE_UI_THEME, _ACTIVE_CB_MATRIX
     
-    # Store the raw data
     _SETTINGS = settings_data.get("color", {})
 
-    # 1. Pre-calculate Encumbrance Scale
-    key_enc = _SETTINGS.get("encumbrance_scale", "default")
-    _ACTIVE_ENCUMBRANCE = _ENCUMBRANCE_SCALES.get(key_enc, _ENCUMBRANCE_SCALES["default"])
-
-    # 2. Pre-calculate Thermal Scale
-    key_therm = _SETTINGS.get("thermal_scale", "default")
-    _ACTIVE_THERMAL = _THERMAL_SCALES.get(key_therm, _THERMAL_SCALES["default"])
-
-    # 3. Pre-calculate UI Theme
+    # UI Theme
     key_ui = _SETTINGS.get("ui_theme", "default")
     _ACTIVE_UI_THEME = _UI_THEMES.get(key_ui, _UI_THEMES["default"])
 
-    # 4. Pre-calculate Colorblind Matrix (Optimization)
+    # Colorblind Mode
     mode = _SETTINGS.get("colorblind_mode", "off").lower()
-    _ACTIVE_CB_MATRIX = _CB_MATRICES.get(mode, None) # None means "off"
+    _ACTIVE_CB_MATRIX = _CB_MATRICES.get(mode, None)
 
-# Initialize with defaults immediately so module is safe to import
+# Initialize defaults
 configure({"color": {}}) 
 
-# --- Helpers ---
-
 def _apply_cb_filter(c: pygame.Color) -> pygame.Color:
-    """Applies the PRE-CALCULATED matrix. Fast."""
     if _ACTIVE_CB_MATRIX is None:
         return c
 
     r, g, b = c.r, c.g, c.b
     m = _ACTIVE_CB_MATRIX
-    # Matrix multiplication
     nr = r*m[0][0] + g*m[0][1] + b*m[0][2]
     ng = r*m[1][0] + g*m[1][1] + b*m[1][2]
     nb = r*m[2][0] + g*m[2][1] + b*m[2][2]
     
     return pygame.Color(min(255, int(nr)), min(255, int(ng)), min(255, int(nb)), c.a)
 
-# --- Public API ---
-
 def get_ui_color(element: str) -> pygame.Color:
-    hex_code = _ACTIVE_UI_THEME.get(element, "#FF00FF")
-    return _apply_cb_filter(pygame.Color(hex_code))
+    """Returns a themed UI color (text, bg, highlight) with CB filter applied."""
+    color_val = _ACTIVE_UI_THEME.get(element, "magenta")
+    return _apply_cb_filter(get(color_val))
