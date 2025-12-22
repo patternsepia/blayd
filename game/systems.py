@@ -1,6 +1,7 @@
 import pygame
 import random
 from game.deebee import *
+from game.entities import create_player, create_mob, create_world_item
 
 class CombatSystem:
     def update(self, player, mobs):
@@ -123,3 +124,57 @@ def attempt_stash_item(player, item_entity):
                 return True, "Held in hand"
 
     return False, "Inventory full"
+
+class SpawnerSystem:
+    def __init__(self):
+        pass
+
+    def spawn_player(self, game):
+        """Finds a safe spot and spawns the player."""
+        # 1. safe placement
+        x, y = game.map.find_open_space(radius=1, bias="top_left")
+        
+        # 2. create entity
+        player = create_player(game, x, y)
+        
+        # 3. register with game engine
+        game.all_sprites.add(player)
+        game.player = player
+        
+        print(f"[Spawner] Player spawned at {x}, {y}")
+        return player
+    
+    def spawn_mob(self, game, mob_id, count=1):
+        """
+        Spawns 'count' instances of 'mob_id'.
+        """
+        for i in range(count):
+            # 1. safe placement
+            x, y = game.map.find_open_space(radius=1, bias="random")
+            
+            # 2. create entity using the ID
+            mob = create_mob(game, mob_id, x, y)
+            
+            if mob:
+                game.mobs.add(mob)
+                game.all_sprites.add(mob)
+                print(f"[Spawner] {mob_id} spawned at {x}, {y}")
+
+
+    def spawn_world_items(self, game, item_ids):
+        """
+        Spawns a list of items at random valid locations.
+        item_ids: list of strings e.g. ["apple", "sword"]
+        """
+        for item_id in item_ids:
+            # 1. Random valid floor tile
+            # We use radius=0 because items fit in 1x1 spaces easily
+            x, y = game.map.find_open_space(radius=0, bias="random")
+            
+            # 2. Create
+            item_ent = create_world_item(game, item_id, x, y)
+            
+            # 3. Register
+            if item_ent:
+                game.all_sprites.add(item_ent)
+                print(f"[Spawner] Dropped {item_id} at {x}, {y}")

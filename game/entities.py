@@ -77,48 +77,60 @@ def create_player(game, x=None, y=None, loadout_key="default"):
     e.refresh_visuals()
     return e
 
-def create_mob(game, x=None, y=None):
+def create_mob(game, mob_id, x=None, y=None):
     """
-    Creates a basic enemy (Goblin).
+    Creates a mob based on a mob_id string found in game.mob_defs.
     """
-    # 1. SPAWN LOGIC
+    # 1. Look up Data
+    if mob_id not in game.mob_defs:
+        print(f"Error: Mob ID '{mob_id}' not found.")
+        return None
+        
+    data = game.mob_defs[mob_id]
+
+    # 2. SPAWN LOGIC
     if x is None or y is None:
         x, y = game.map.find_open_space(radius=1, bias="bottom_right")
     
     e = Entity(game, x, y)
     
-    # 2. VISUALS & PHYSICS
-    e.visual = VisualComponent(pygame.Color(128, 64, 0)) 
-    e.physics = PhysicsComponent(x, y, speed_mps=1.0)
+    # 3. VISUALS & PHYSICS (From Data)
+    color = data.get("color", [255, 0, 0])
+    speed = data.get("speed", 1.0)
     
-    # --- FIX: GIVE MOB A BRAIN ---
-    e.control = AIControlComponent(target_name="player") 
+    e.visual = VisualComponent(pygame.Color(*color)) 
+    e.physics = PhysicsComponent(x, y, speed_mps=speed)
     
-    # 3. STATS
-    e.stats = StatsComponent(hp=30, max_hp=30, equipment={
-        "weapon": {"name": "Claws", "atk": 2},
-        "armor": {"name": "Rags", "def": 0}
+    # 4. CONTROLLER (Simple AI toggle)
+    ai_type = data.get("ai", "player_chase")
+    if ai_type == "player_chase":
+        e.control = AIControlComponent(target_name="player")
+    
+    # 5. STATS
+    hp = data.get("hp", 10)
+    e.stats = StatsComponent(hp=hp, max_hp=hp, equipment={
+        "weapon": {"name": "Natural", "atk": 1}, # Fallback
+        "armor": {"name": "Skin", "def": 0}
     })
 
-    # 4. ANATOMY SETUP
-    mob_data = game.body_plans.get("goblin", game.body_plans.get("humanoid", []))
-    e.body = BodyComponent(mob_data)
+    # 6. ANATOMY SETUP
+    bp_key = data.get("body_plan", "humanoid")
+    mob_plan = game.body_plans.get(bp_key, game.body_plans.get("humanoid", []))
+    e.body = BodyComponent(mob_plan)
     
-    # 5. MOB LOADOUT
-    mob_gear = ["combat_knife"] 
+    # 7. MOB LOADOUT
+    gear_list = data.get("loadout", [])
     
-    for item_id in mob_gear:
+    for item_id in gear_list:
         item = create_item(game, item_id, game.item_defs)
-        
         if item:
             if not e.body.equip(item):
-                print(f"Mob at {x},{y} failed to equip {item_id}")
-                item.kill() 
-            else:
-                print(f"Mob equipped {item_id}")
+                print(f"Mob {mob_id} failed to equip {item_id}")
+                item.kill()
 
     e.refresh_visuals()
     return e
+
 def create_world_item(game, item_id, x, y):
     """
     Spawns an item on the ground at specific coordinates.

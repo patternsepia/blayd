@@ -5,7 +5,7 @@ from engine.base_entity import Entity
 from game.components import *
 
 # --- 1. ITEM SYSTEMS ---
-def load_item_definitions():
+def load_items():
     """
     Reads items.json and returns a dictionary of items keyed by ID.
     Returns: { "jeans": {...data...}, ... } or {} on error.
@@ -182,6 +182,22 @@ def load_materials():
         
     except json.JSONDecodeError as e:
         print(f"Error decoding materials.json: {e}")
+        return {}
+
+def load_mobs():
+    """
+    Reads mobs.json and returns a dictionary of mob definitions.
+    """
+    path = os.path.join(DATA_DIR, "mobs.json")
+    if not os.path.exists(path):
+        print(f"Warning: Mobs file not found at {path}")
+        return {} 
+
+    try:
+        with open(path, 'r') as f:
+            return json.load(f)
+    except json.JSONDecodeError as e:
+        print(f"Error decoding mobs.json: {e}")
         return {}
 
 # --- 5. CONFIGURATION SYSTEMS ---

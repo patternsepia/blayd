@@ -1,0 +1,128 @@
+{
+  "goblin": {
+    "name": "Goblin",
+    "hp": 30,
+    "speed": 1.0,
+    "color": [128, 64, 0],
+    "body_plan": "goblin",
+    "loadout": ["combat_knife"],
+    "ai": "player_chase"
+  },
+  "rat": {
+    "name": "Giant Rat",
+    "hp": 10,
+    "speed": 1.2,
+    "color": [100, 100, 100],
+    "body_plan": "quadruped_small",
+    "loadout": [],
+    "ai": "player_chase"
+  },
+  "skeleton": {
+    "name": "Skeleton",
+    "hp": 20,
+    "speed": 0.5,
+    "color": [100, 100, 100],
+    "body_plan": "humanoid",
+    "loadout": [],
+    "ai": "player_chase"
+  },
+    "orc": {
+        "name": "Orc",
+        "hp": 50,
+        "speed": 0.8,
+        "color": [128, 0, 0],
+        "body_plan": "orc",
+        "loadout": ["club"],
+        "ai": "player_chase"
+    },
+    "troll": {
+        "name": "Troll",
+        "hp": 100,
+        "speed": 0.5,
+        "color": [128, 128, 0],
+        "body_plan": "troll",
+        "loadout": ["club"],
+        "ai": "player_chase"
+    },
+    "giant_spider": {
+        "name": "Giant Spider",
+        "hp": 40,
+        "speed": 1.5,
+        "color": [128, 128, 128],
+        "body_plan": "spider",
+        "loadout": ["web"],
+        "ai": "player_chase"
+    },
+    "skeleton_archer": {
+        "name": "Skeleton Archer",
+        "hp": 15,
+        "speed": 0.6,
+        "color": [100, 100, 100],
+        "body_plan": "humanoid",
+        "loadout": ["bow"],
+        "ai": "player_chase"
+    },
+    "goblin_spearman": {
+        "name": "Goblin Spearman",
+        "hp": 35,
+        "speed": 0.9,
+        "color": [128, 64, 0],
+        "body_plan": "goblin",
+        "loadout": ["spear"],
+        "ai": "player_chase"
+    },
+    "dire_wolf": {
+        "name": "Dire Wolf",
+        "hp": 45,
+        "speed": 1.8,
+        "color": [70, 70, 70],
+        "body_plan": "quadruped_large",
+        "loadout": [],
+        "ai": "player_chase"
+    },
+    "goblin_archer": {
+        "name": "Goblin Archer",
+        "hp": 25,
+        "speed": 1.0,
+        "color": [128, 64, 0],
+        "body_plan": "goblin",
+        "loadout": ["bow"],
+        "ai": "player_chase"
+    },
+    "orc_archer": {
+        "name": "Orc Archer",
+        "hp": 35,
+        "speed": 0.8,
+        "color": [128, 0, 0],
+        "body_plan": "orc",
+        "loadout": ["bow"],
+        "ai": "player_chase"
+    },
+    "goblin_shaman": {
+        "name": "Goblin Shaman",
+        "hp": 20,
+        "speed": 0.7,
+        "color": [128, 64, 0],
+        "body_plan": "goblin",
+        "loadout": ["staff"],
+        "ai": "player_chase"
+    },
+    "troll_shaman": {
+        "name": "Troll Shaman",
+        "hp": 60,
+        "speed": 0.5,
+        "color": [128, 128, 0],
+        "body_plan": "troll",
+        "loadout": ["staff"],
+        "ai": "player_chase"
+    },
+    "giant_spider_archer": {
+        "name": "Giant Spider Archer",
+        "hp": 30,
+        "speed": 1.2,
+        "color": [128, 128, 128],
+        "body_plan": "spider",
+        "loadout": ["web", "bow"],
+        "ai": "player_chase"
+    }
+}

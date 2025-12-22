@@ -5,20 +5,18 @@ from types import SimpleNamespace
 import pygame
 
 # Engine
-from engine.events import StateManager
+from engine.events import StateManager, EventBus
 from engine import colors as cn
 from engine.input import InputManager
 # Game Logic
 import game.deebee as db
+
 from game.map_gen import Map
 from game.loader import *
-from game.entities import create_player, create_mob
-from game.systems import CombatSystem
-from game.systems import MaterialSystem
+from game.systems import *
 # UI & States
 from game.hud import HUD
 from game.states import MainMenuState, RoamingState
-
 # Persistence
 from game.persist import save_game_state, load_game_state
 
@@ -43,10 +41,11 @@ class Game:
         self.dt = 0
         
         # Data Loading
-        self.item_defs = load_item_definitions()
+        self.item_defs = load_items()
         self.body_plans = load_body_plans()
         self.loadout_defs = validate_loadouts(load_loadouts(), self.item_defs)
         self.material_defs = load_materials()
+        self.mob_defs = load_mobs()
         
         self.hud = HUD()
         self.custom_seed = None
@@ -67,24 +66,29 @@ class Game:
         self.all_sprites = None
         self.mobs = None
         self.combat_system = None
-        self.material_sytem = MaterialSystem(self.material_defs)
+        self.material_sytem = None
+        self.spawner_system = None
+
 
     def new_game(self):
         self.map = Map(db.GRID_WIDTH, db.GRID_HEIGHT, seed=self.custom_seed)
         self.custom_seed = None
+
+        self.bus = EventBus()
         
         self.all_sprites = pygame.sprite.Group()
         self.mobs = pygame.sprite.Group()
         
-        self.player = create_player(self) 
-        self.all_sprites.add(self.player)
+        self.spawner_system.spawn_player(self)
         
-        for _ in range(3):
-            mob = create_mob(self)
-            self.mobs.add(mob)
-            self.all_sprites.add(mob)
+        self.spawner_system.spawn_mobs(self, "goblin", count=1)
+        
+        self.spawner_system.spawn_mobs(self, "rat", count=3)
 
         self.combat_system = CombatSystem()
+        self.material_system = MaterialSystem(self.material_defs)
+        self.spawner_system = SpawnerSystem()
+
         self.state_machine.set(self.states['roaming'])
 
     def save_game(self):
@@ -122,7 +126,10 @@ class Game:
             self.state_machine.handle_input(self.input)
             
             self.state_machine.update()
-            self.state_machine.draw(self.screen)
+            
+            # System Updates (Run these regardless of State, or inside RoamingState)
+            if self.state_machine.stack and isinstance(self.state_machine.stack[-1], self.states['roaming'].__class__):
+                 self.material_system.update(self, self.dt) # Pass 'self' as game_context            self.state_machine.draw(self.screen)
             pygame.display.flip()
 
 if __name__ == "__main__":

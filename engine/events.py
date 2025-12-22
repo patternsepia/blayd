@@ -2,6 +2,56 @@ import pygame
 import sys
 from typing import List, Optional
 
+class Signal:
+    """
+    A specific channel that subscribers can listen to.
+    """
+    def __init__(self):
+        self._subscribers = []
+
+    def connect(self, func):
+        """Adds a function to be called when this signal emits."""
+        if func not in self._subscribers:
+            self._subscribers.append(func)
+
+    def disconnect(self, func):
+        if func in self._subscribers:
+            self._subscribers.remove(func)
+
+    def emit(self, data=None):
+        """Calls all connected subscribers with the provided data."""
+        for func in self._subscribers:
+            func(data)
+
+class EventBus:
+    """
+    The central hub for global game events.
+    """
+    def __init__(self):
+        self.signals = {}
+
+    def subscribe(self, topic: str, func):
+        """
+        Listens for a specific topic string (e.g., "mob_killed").
+        Creates the Signal automatically if it doesn't exist.
+        """
+        if topic not in self.signals:
+            self.signals[topic] = Signal()
+        self.signals[topic].connect(func)
+
+    def unsubscribe(self, topic: str, func):
+        if topic in self.signals:
+            self.signals[topic].disconnect(func)
+
+    def emit(self, topic: str, data=None):
+        """
+        Broadcasts an event to all subscribers of 'topic'.
+        """
+        if topic in self.signals:
+            self.signals[topic].emit(data)
+        # Optional: Debug log
+        print(f"[EventBus] Emitted '{topic}' with payload: {data}")
+
 class GameState:
     """
     Base class for all game states (Roaming, Inventory, Menus).
