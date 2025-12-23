@@ -1,29 +1,14 @@
 import pygame
-import spectra as sp
+import spectra
 import hsluv
-import sys
 from typing import Union, List, Tuple, Dict, Any, Optional
-
-# --- 1. MODULE SELF-REFERENCE ---
-_this_module = sys.modules[__name__]
-
-# --- 2. INJECT STANDARD PYGAME COLORS ---
-# Allows usage like cn.RED or cn.MINTCREAM immediately.
-if pygame.get_init():
-    for name, rgb in pygame.color.THECOLORS.items():
-        # Inject into module namespace (cn.RED)
-        setattr(_this_module, name.upper(), rgb)
 
 # --- 3. CUSTOM COLOR GENERATORS ---
 
-def GRIS(v: int) -> pygame.Color:
+def gris(v: int) -> pygame.Color:
     """Returns a robust grey color tuple (v, v, v)."""
     val = max(0, min(255, int(v)))
     return pygame.Color(val, val, val)
-
-# Generate cn.GRIS0 through cn.GRIS255
-for i in range(256):
-    setattr(_this_module, f"GRIS{i}", GRIS(i))
 
 # --- 4. THE "JUST WORKS" RESOLVER ---
 
@@ -34,7 +19,7 @@ def get(value: Union[str, Tuple, List, Dict, pygame.Color]) -> pygame.Color:
     
     Usage:
         cn.get("red")             -> Color(255, 0, 0)
-        cn.get("GRIS128")         -> Color(128, 128, 128)
+        cn.get("gris128")         -> Color(128, 128, 128)
         cn.get("cornflowerblue")  -> Color(100, 149, 237)
         cn.get((0, 255, 0))       -> Color(0, 255, 0)
     """
@@ -60,19 +45,26 @@ def get(value: Union[str, Tuple, List, Dict, pygame.Color]) -> pygame.Color:
 
     # 4. String? (The magic part)
     if isinstance(value, str):
-        # A. Check our module constants (e.g., "GRIS50", "MIDNIGHTBLUE")
-        if hasattr(_this_module, value):
-            return getattr(_this_module, value)
-        if hasattr(_this_module, value.upper()):
-            return getattr(_this_module, value.upper())
-
+        value = value.strip().lower()
+        # A. Check Spectra's HTML names
+        try:
+            return pygame.Color(spectra.html(value).values)
+        except ValueError:
+            pass
         # B. Check Standard Pygame/Hex/HTML names
         try:
             return pygame.Color(value)
         except ValueError:
             pass
+        try:
+            return pygame.Color("#" + value)
+        except ValueError:
+            pass
+        # C. Handle custom "gris" values
+        if value.startswith("gris"):
+            return pygame.Color(gris(int(value[4:])))
             
-    # 5. Fallback (Bright Pink to indicate error visibly)
+    # 5. Fallback (magenta) to indicate error visibly)
     print(f"[Color] Warning: Could not resolve color '{value}'. returning MAGENTA.")
     return pygame.Color("magenta")
 
@@ -90,7 +82,7 @@ def df_scale(colors_list: List[Any]):
         # Spectra prefers Hex strings
         sanitized.append("#%02x%02x%02x" % (col.r, col.g, col.b))
             
-    return sp.scale(sanitized)    
+    return spectra.scale(sanitized)    
 
 # --- 6. PALETTES & THEMES ---
 
