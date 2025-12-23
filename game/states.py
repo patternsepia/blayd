@@ -1,6 +1,7 @@
 import pygame
 import sys
 import random
+import logging
 
 from engine.events import GameState
 from engine import colors as cn
@@ -11,14 +12,23 @@ from game.deebee import *
 from game.components import PhysicsComponent, PickupComponent, VisualComponent
 from game.systems import attempt_stash_item
 
+logger = logging.getLogger(__name__)
+
 class GameState:
+    def __init__(self, game):
+        self.game = game
+    def enter(self): pass
+    def exit(self): pass
     def handle_input(self, input_mgr): pass # For Actions (Movement, UI Nav)
     def handle_event(self, event): pass     # For Raw Events (Typing)
+    def update(self): pass
+    def draw(self, screen): pass
 
 # --- 1. MAIN MENU STATE ---
 class MainMenuState(GameState):
     def __init__(self, game):
         super().__init__(game)
+        logger.info("MainMenuState initialized.")
         self.font = pygame.font.SysFont("arial", 24)
         
         # 1. Title Label
@@ -43,15 +53,15 @@ class MainMenuState(GameState):
 
     def handle_input(self, input_mgr):
         # Delegate to UI
-        self.menu_box.handle_event(input_mgr)
+        self.menu_box.handle_input(input_mgr)
 
     def draw(self, screen):
-        bg = self.game.c.get('colors', {}).get('ui', {}).get('bg_color', cn.BLACK)
+        bg = self.game.c.get('colors', {}).get('ui', {}).get('bg_color', cn.get("black"))
         screen.fill(bg)
         
         self.title.draw(screen)
         if self.game.custom_seed:
-            lbl = self.font.render(f"Seed: {self.game.custom_seed}", True, cn.GREEN)
+            lbl = self.font.render(f"Seed: {self.game.custom_seed}", True, cn.get("green"))
             screen.blit(lbl, (50, 120))
             
         self.menu_box.draw(screen)
@@ -78,8 +88,8 @@ class PauseState(GameState):
         self.menu_box.selection_index = 0
         self.menu_box._update_selection()
 
-    def handle_input(self, event):
-        self.menu_box.handle_event(event)
+    def handle_input(self, input_mgr):
+        self.menu_box.handle_input(input_mgr)
 
     def draw(self, screen):
         # Overlay logic
@@ -91,7 +101,7 @@ class PauseState(GameState):
         panel_rect = pygame.Rect(self.menu_box.rect.x - 20, self.menu_box.rect.y - 20, 
                                  self.menu_box.rect.width + 40, self.menu_box.rect.height + 40)
         pygame.draw.rect(screen, (40, 40, 50), panel_rect)
-        pygame.draw.rect(screen, cn.WHITE, panel_rect, 2)
+        pygame.draw.rect(screen, cn.get("white"), panel_rect, 2)
         
         self.menu_box.draw(screen)
 
@@ -108,7 +118,7 @@ class SeedInputState(GameState):
         self.label = Label(cx, cy - 40, "Enter Map Seed:", self.font)
         self.input_box = InputBox(cx, cy, 300, 40, self.font)
         
-    def handle_input(self, event):
+    def handle_event(self, event):
         # 1. Global Keys
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
@@ -135,10 +145,13 @@ class SeedInputState(GameState):
 
 # --- 4. ROAMING & GAMEPLAY (Unchanged UI logic for now) ---
 # Note: InventoryState is complex data-binding. 
-# For now, it is okay to keep the specialized render logic in InventoryState 
+# TODO:For now, it is okay to keep the specialized render logic in InventoryState 
 # until we build a "DataGrid" or "ListView" widget in engine/ui.py.
 
 class RoamingState(GameState):
+    def __init__(self, game):
+        super().__init__(game)
+
     def handle_input(self, input_mgr):
         # 1. Global Toggles
         if input_mgr.is_just_pressed("CANCEL"): # ESC
@@ -157,7 +170,7 @@ class RoamingState(GameState):
             self.game.combat_system.update(self.game.player, self.game.mobs)
 
     def draw(self, screen):
-        screen.fill(self.game.c.get('BG_COLOR', cn.BLACK))
+        screen.fill(self.game.c.get('BG_COLOR', cn.get("BLACK")))
         self.game.draw_grid()
         if self.game.all_sprites:
             self.game.all_sprites.draw(screen)
@@ -227,7 +240,7 @@ class InventoryState(GameState):
         if not self.visible_items: self.selection_index = 0
         elif self.selection_index >= len(self.visible_items): self.selection_index = len(self.visible_items) - 1
 
-    def handle_input(self, event):
+    def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE or event.key == pygame.K_i:
                 self.game.state_machine.pop()
@@ -308,35 +321,35 @@ class InventoryState(GameState):
         
         # 3. Ensure Visuals (If it was just an inventory item)
         if not hasattr(item, 'visual') or not item.visual:
-            item.visual = VisualComponent(color=cn.GOLD)
+            item.visual = VisualComponent(color=cn.get("GOLD"))
 
         if not hasattr(item, 'pickup'): item.pickup = PickupComponent()
         if item not in self.game.all_sprites: self.game.all_sprites.add(item)
 
     def draw(self, screen):
-        screen.fill(cn.BLACK)
-        pygame.draw.rect(screen, cn.DARKGREY, (0,0,WIDTH,80))
-        pygame.draw.line(screen, cn.WHITE, (0,80), (WIDTH,80), 2)
-        screen.blit(self.font_status.render("Inventory", True, cn.WHITE), (10, 10))
+        screen.fill(cn.get("black"))
+        pygame.draw.rect(screen, cn.get("darkgrey"), (0,0,WIDTH,80))
+        pygame.draw.line(screen, cn.get("white"), (0,80), (WIDTH,80), 2)
+        screen.blit(self.font_status.render("Inventory", True, cn.get("white")), (10, 10))
         
         start_y = 90
         for i, entry in enumerate(self.visible_items):
             if isinstance(entry, str):
-                screen.blit(self.font_header.render(entry, True, cn.LIGHTGREY), (10, start_y + i*25))
+                screen.blit(self.font_header.render(entry, True, cn.get("lightgrey")), (10, start_y + i*25))
                 continue
             entity = entry if self.current_container else entry[0]
             is_sel = (i == self.selection_index)
-            sel_color = getattr(cn, 'SELECTION_COLOR', (60, 60, 70))
+            sel_color = cn.get((60, 60, 70))
             if is_sel: pygame.draw.rect(screen, sel_color, (0, start_y + i*25, WIDTH, 25))
-            screen.blit(self.font_main.render(entity.item.name, True, cn.WHITE), (30, start_y + i*25))
+            screen.blit(self.font_main.render(entity.item.name, True, cn.get("white")), (30, start_y + i*25))
             
-        pygame.draw.rect(screen, cn.DARKGREY, (0, HEIGHT-30, WIDTH, 30))
-        screen.blit(self.font_status.render("d:Drop +/-:Wear >:Enter <:Back", True, cn.SILVER), (10, HEIGHT-22))
+        pygame.draw.rect(screen, cn.get("darkgrey"), (0, HEIGHT-30, WIDTH, 30))
+        screen.blit(self.font_status.render("d:Drop +/-:Wear >:Enter <:Back", True, cn.get("silver")), (10, HEIGHT-22))
 
 class PickupDirectionState(GameState):
     def enter(self):
         print("[UI] Pickup: Choose direction.")
-    def handle_input(self, event):
+    def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
             dx, dy = 0, 0
             valid = False
@@ -357,8 +370,8 @@ class PickupDirectionState(GameState):
     def draw(self, screen):
         self.game.states['roaming'].draw(screen)
         pygame.draw.rect(screen, (0,0,0), (10, 10, 300, 40))
-        pygame.draw.rect(screen, cn.WHITE, (10, 10, 300, 40), 2)
-        screen.blit(pygame.font.SysFont("arial", 20).render("Direction? (Arrows/G)", True, cn.WHITE), (20, 18))
+        pygame.draw.rect(screen, cn.get("white"), (10, 10, 300, 40), 2)
+        screen.blit(pygame.font.SysFont("arial", 20).render("Direction? (Arrows/G)", True, cn.get("white")), (20, 18))
 
 class PickupSelectState(GameState):
     def __init__(self, game, tx, ty):
@@ -381,7 +394,7 @@ class PickupSelectState(GameState):
             print("Nothing to pick up.")
             self.game.state_machine.pop()
 
-    def handle_input(self, event):
+    def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE: self.game.state_machine.pop()
             elif event.key == pygame.K_UP: self.cursor = max(0, self.cursor - 1)
@@ -404,7 +417,7 @@ class PickupSelectState(GameState):
         pygame.draw.rect(screen, (200, 200, 200), bg, 2)
         font = pygame.font.SysFont("arial", 20)
         for i, item in enumerate(self.items):
-            color = cn.WHITE
+            color = cn.get("white")
             prefix = "> " if i == self.cursor else "  "
             prefix += "[+] " if i in self.selected else "[ ] "
             screen.blit(font.render(f"{prefix}{item.item.name}", True, color), (120, 120 + i * 25))

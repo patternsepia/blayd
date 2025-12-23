@@ -27,10 +27,10 @@ class Button(Widget):
         self.trigger_action = trigger_action # The logical action that clicks this
         
         # Style
-        self.bg_color = cn.get("DARKGREY")
-        self.hover_color = cn.get("LIGHTBLUE")
-        self.text_color = cn.get("WHITE")
-        self.border_color = cn.get("LIGHTGREY")
+        self.bg_color = cn.get("darkgrey")
+        self.hover_color = cn.get("lightblue")
+        self.text_color = cn.get("white")
+        self.border_color = cn.get("lightgrey")
 
     def handle_input(self, input_mgr):
         if not self.active or not self.visible: return False
@@ -130,14 +130,16 @@ class InputBox(Widget):
     def handle_input(self, input_mgr): return False
 
     def draw(self, surface):
-        pygame.draw.rect(surface, cn.get("gris40"), self.rect)
+        pygame.draw.rect(surface, cn.get("darkgrey"), self.rect)
         pygame.draw.rect(surface, cn.get("white"), self.rect, 2)
         txt = self.font.render(self.text, True, cn.get("white"))
         surface.blit(txt, (self.rect.x + 5, self.rect.y + 5))
     
     # Helper Label Class
 class Label(Widget):
-    def __init__(self, x, y, text, font, color=cn.get("white")):
+    def __init__(self, x, y, text, font, color=None):
+        if color is None:
+            color = cn.get("white")
         surf = font.render(text, True, color)
         super().__init__(x, y, surf.get_width(), surf.get_height())
         self.text, self.font, self.color = text, font, color

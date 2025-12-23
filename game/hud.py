@@ -1,11 +1,16 @@
 import pygame
+import logging
 from game.deebee import *
+from engine import colors as cn
+
+logger = logging.getLogger(__name__)
 
 class HUD:
     def __init__(self):
         self.font = pygame.font.SysFont("arial", 20)
         self.bar_length = 200
         self.bar_height = 10
+        logger.info("HUD initialized.")
 
     def draw(self, surface, player):
         # 1. Safety Check (Player might be dead/None)
@@ -50,9 +55,9 @@ class HUD:
             pct = 0
             
         fill_rect = pygame.Rect(10, 10, int(self.bar_length * pct), self.bar_height)
-        col = GREEN if pct > 0.5 else (255, 255, 0) if pct > 0.2 else RED
+        col = cn.get("green") if pct > 0.5 else (255, 255, 0) if pct > 0.2 else cn.get("red")
         pygame.draw.rect(surface, col, fill_rect)
-        pygame.draw.rect(surface, WHITE, outline_rect, 2) # Border
+        pygame.draw.rect(surface, cn.get("white"), outline_rect, 2) # Border
 
         # 4. Draw Text
         self.draw_text(surface, f"{hp:.0f}/{max_hp:.0f}", 220, 10)
@@ -62,10 +67,10 @@ class HUD:
         # Draw Seed (Bottom Right)
         if hasattr(player.game.map, 'seed'):
             seed_text = f"Seed: {player.game.map.seed}"
-            text_surf = self.font.render(seed_text, True, EMERALD)
+            text_surf = self.font.render(seed_text, True, cn.get("springgreen"))
             rect = text_surf.get_rect(bottomright=(WIDTH - 10, HEIGHT - 10))
             surface.blit(text_surf, rect)
 
     def draw_text(self, surface, text, x, y):
-        text_surface = self.font.render(text, True, WHITE)
+        text_surface = self.font.render(text, True, cn.get("white"))
         surface.blit(text_surface, (x, y))

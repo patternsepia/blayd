@@ -1,6 +1,9 @@
 import random
 import time
+import logging
 from game import deebee as db
+
+logger = logging.getLogger(__name__)
 
 class Map:
     def __init__(self, width=db.GRID_WIDTH, height=db.GRID_HEIGHT, seed=None):
@@ -11,6 +14,8 @@ class Map:
             self.seed = str(int(time.time()))
         else:
             self.seed = str(seed)
+        
+        logger.info(f"Initializing Map {width}x{height} with seed: {self.seed}")
         self.rng = random.Random(self.seed)
         self.generate()
 
@@ -122,7 +127,7 @@ class Map:
                         queue.append((nx, ny))
 
         # 4. Emergency Fallback (Map is 100% walls)
-        print("CRITICAL: Map has no floor tiles!")
+        logger.critical("Map has no floor tiles!")
         return (1, 1)
     
     def find_open_space(self, radius=1, bias="top_left"):
@@ -185,8 +190,8 @@ class Map:
 
         # 5. Fallback: If no large space exists, try radius 0 (fit anywhere)
         if radius > 0:
-            print(f"Warning: No empty space of radius {radius} found. Retrying with radius 0.")
+            logger.warning(f"No empty space of radius {radius} found. Retrying with radius 0.")
             return self.find_open_space(radius=0, bias=bias)
             
-        print("CRITICAL: Map is 100% walls.")
+        logger.critical("Map is 100% walls.")
         return (1, 1)

@@ -1,7 +1,10 @@
 import pygame
 import random
+import logging
 from game.deebee import *
 from game.entities import create_player, create_mob, create_world_item
+
+logger = logging.getLogger(__name__)
 
 class CombatSystem:
     def update(self, player, mobs):
@@ -41,7 +44,7 @@ class CombatSystem:
             # Apply Damage
             if hasattr(mob, "stats"):
                 mob.stats.hp -= weapon_dmg
-                print(f"Hit Mob! Damage: {weapon_dmg} | Mob HP: {mob.stats.hp}")
+                logger.debug(f"Hit Mob! Damage: {weapon_dmg} | Mob HP: {mob.stats.hp}")
             
             # Simulation: Knockback
             # Simple physics bounce: if player moving right, push mob right
@@ -61,6 +64,7 @@ class CombatSystem:
 class MaterialSystem:
     def __init__(self, material_db):
         self.material_db = material_db
+        logger.info("MaterialSystem initialized.")
 
     def update(self, game_context, dt):
         # 1. Get Global Context from the passed 'game_context'
@@ -127,7 +131,7 @@ def attempt_stash_item(player, item_entity):
 
 class SpawnerSystem:
     def __init__(self):
-        pass
+        logger.info("SpawnerSystem initialized.")
 
     def spawn_player(self, game):
         """Finds a safe spot and spawns the player."""
@@ -141,7 +145,7 @@ class SpawnerSystem:
         game.all_sprites.add(player)
         game.player = player
         
-        print(f"[Spawner] Player spawned at {x}, {y}")
+        logger.info(f"Player spawned at {x}, {y}")
         return player
     
     def spawn_mob(self, game, mob_id, count=1):
@@ -158,7 +162,7 @@ class SpawnerSystem:
             if mob:
                 game.mobs.add(mob)
                 game.all_sprites.add(mob)
-                print(f"[Spawner] {mob_id} spawned at {x}, {y}")
+                logger.info(f"{mob_id} spawned at {x}, {y}")
 
 
     def spawn_world_items(self, game, item_ids):
@@ -177,4 +181,4 @@ class SpawnerSystem:
             # 3. Register
             if item_ent:
                 game.all_sprites.add(item_ent)
-                print(f"[Spawner] Dropped {item_id} at {x}, {y}")
+                logger.info(f"Dropped {item_id} at {x}, {y}")

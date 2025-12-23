@@ -1,3 +1,4 @@
+import pygame
 
 # --- META SETTINGS ---
 TITLE = "Blayd"
@@ -101,10 +102,18 @@ _window_prefs = _user_settings.get("window", {})
 _perf_prefs = _user_settings.get("performance", {})
 _audio_prefs = _user_settings.get("audio", {})
 _color_prefs = _user_settings.get("colors", {})
+_log_prefs = _user_settings.get("logging", {})
 
 # Window settings
 WIDTH = _window_prefs.get("width", _DEFAULT_WIDTH)
 HEIGHT = _window_prefs.get("height", _DEFAULT_HEIGHT)
+
+# Logging settings
+LOG_CONFIG = {
+    "level": _log_prefs.get("level", "INFO"),
+    "file": os.path.join(DATA_DIR, "logs", _log_prefs.get("filename", "blayd.log")),
+    "format": _log_prefs.get("format", "%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+}
 
 # Performance settings
 TPS = _perf_prefs.get("tps", _DEFAULT_TPS)
@@ -123,9 +132,56 @@ VOICE_VOLUME = _audio_prefs.get("voice_volume", _DEFAULT_VOLUME)
 THEME = _color_prefs.get("theme", _DEFAULT_THEME)
 
 # CALCULATED VALUES
-GRID_WIDTH = WIDTH / TILESIZE
-GRID_HEIGHT = HEIGHT / TILESIZE
+GRID_WIDTH = WIDTH // TILESIZE
+GRID_HEIGHT = HEIGHT // TILESIZE
 SCREEN_CENTER_X = WIDTH / 2
 SCREEN_CENTER_Y = HEIGHT / 2
 SCREEN_CENTER = (SCREEN_CENTER_X, SCREEN_CENTER_Y)
 
+# --- INPUT BINDINGS ---
+KEY_BINDINGS = {
+    # --- MOVEMENT ---
+    "UP":       [pygame.K_UP, pygame.K_w, pygame.K_KP8],
+    "DOWN":     [pygame.K_DOWN, pygame.K_s, pygame.K_KP2],
+    "LEFT":     [pygame.K_LEFT, pygame.K_a, pygame.K_KP4],
+    "RIGHT":    [pygame.K_RIGHT, pygame.K_d, pygame.K_KP6],
+    "WAIT":     [pygame.K_PERIOD, pygame.K_KP5, pygame.K_KP_PERIOD],
+    "JUMP":     [pygame.K_SPACE],
+    "CYCLE":    [pygame.K_TAB],
+
+    # --- INTERACTION ---
+    "PICKUP":   [pygame.K_g],
+    "INTERACT": [pygame.K_e],
+    "AIM":      [pygame.K_f],
+    "FIRE":     [pygame.K_f, pygame.K_RETURN],
+    "RELOAD":   [pygame.K_r],
+    "OPEN":     [pygame.K_o],
+    "CLOSE":    [pygame.K_c],
+    "BASH":     [pygame.K_b],
+    "ZAP":      [pygame.K_z],
+
+    # --- INVENTORY ---
+    "INSPECT":        [pygame.K_i],
+    "THROW":          [pygame.K_t],
+    "ACTIVATE":       [pygame.K_a],
+    "REFILL":         [pygame.K_r],
+    "DROP":           [pygame.K_d],
+    "EAT":            [pygame.K_e],
+    "QUAFF":          [pygame.K_q],
+    "WIELD":          [pygame.K_w],
+    "WEAR":           [pygame.K_PLUS, pygame.K_KP_PLUS],
+    "UNWEAR":         [pygame.K_MINUS, pygame.K_KP_MINUS],
+    "ENTER_CONTAINER":[pygame.K_GREATER, pygame.K_PERIOD],
+    "EXIT_CONTAINER": [pygame.K_LESS, pygame.K_COMMA],
+
+    # --- SYSTEM ---
+    "CONFIRM":  [pygame.K_RETURN, pygame.K_KP_ENTER],
+    "CANCEL":   [pygame.K_ESCAPE, pygame.K_BACKSPACE],
+    "MENU":     [pygame.K_ESCAPE],
+    
+    # --- META ---
+    "SAVE":     [pygame.K_s], 
+    "LOAD":     [pygame.K_l],
+    "QUIT":     [pygame.K_q],
+    "DEBUG_CONSOLE": [pygame.K_BACKQUOTE],
+}

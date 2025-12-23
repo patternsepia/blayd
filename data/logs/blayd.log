@@ -1,0 +1,19 @@
+2025-12-23 06:16:08,047 [INFO] root: Logger initialized.
+2025-12-23 06:16:08,048 [INFO] Main: --- Game Init Start ---
+2025-12-23 06:16:08,814 [INFO] Main: Pygame Initialized
+2025-12-23 06:16:08,815 [INFO] Main: Settings Loaded: ['window', 'performance', 'audio', 'color']
+2025-12-23 06:16:08,815 [INFO] Main: Config: namespace(WIDTH=800, HEIGHT=600, TPS=100, FPS=60)
+2025-12-23 06:16:08,815 [INFO] engine.input: InputManager initialized with 35 actions.
+2025-12-23 06:16:08,895 [INFO] Main: Screen Created 800x600
+2025-12-23 06:16:08,896 [INFO] Main: Loading Data...
+2025-12-23 06:16:08,897 [INFO] game.loader: Loaded 19 items (from list).
+2025-12-23 06:16:08,904 [INFO] game.loader: Loaded body plans for: ['humanoid', 'tiefling', 'goblin']
+2025-12-23 06:16:08,905 [INFO] game.loader: Loaded 3 loadouts.
+2025-12-23 06:16:08,906 [INFO] game.loader: Loaded 9 materials.
+2025-12-23 06:16:08,907 [INFO] game.loader: Loaded 14 mob definitions.
+2025-12-23 06:16:08,907 [INFO] Main: Data Loaded
+2025-12-23 06:16:08,916 [INFO] game.hud: HUD initialized.
+2025-12-23 06:16:08,917 [INFO] game.states: MainMenuState initialized.
+2025-12-23 06:16:08,919 [INFO] Main: Pushing Main Menu
+2025-12-23 06:16:08,920 [INFO] Main: Init Complete
+2025-12-23 06:16:08,920 [INFO] Main: Entering Run Loop
